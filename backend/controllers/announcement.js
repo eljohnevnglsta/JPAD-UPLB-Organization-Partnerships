@@ -16,7 +16,7 @@ export const Announcement = mongoose.model('Announcement', {
         required: true,
         unique: true
     },
-    orgId: {
+    publisher: {
         type: String, // Email of the organization
         required: true
     },
@@ -39,12 +39,12 @@ export const Announcement = mongoose.model('Announcement', {
 });
 
 export const createAnnouncement = async (req, res) => {
-    const { orgId, title, description, eventId, cover } = req.body;
+    const { publisher, title, description, eventId, cover } = req.body;
     const announcementId = new mongoose.Types.ObjectId().toHexString();
     try {
         await Announcement.create({
             announcementId,
-            orgId,
+            publisher,
             title,
             description,
             eventId,
@@ -60,7 +60,7 @@ export const getAnnouncementById = async (req, res) => {
     const { announcementId } = req.body;
     try {
         const announcement = await Announcement.findOne({ announcementId });
-        res.status(200).send({ success: true, announcement });
+        res.status(200).send(announcement);
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
@@ -70,17 +70,17 @@ export const getAnnouncementById = async (req, res) => {
 export const getAllAnnouncements = async (req, res) => {
     try {
         const announcements = await Announcement.find();
-        res.status(200).send({ success: true, announcements });
+        res.status(200).send(announcements);
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
 }
 
 export const getAnnouncementsByOrg = async (req, res) => {
-    const { orgId } = req.body;
+    const { publisher } = req.body;
     try {
-        const announcements = await Announcement.find({ orgId });
-        res.status(200).send({ success: true, announcements });
+        const announcements = await Announcement.find({ publisher });
+        res.status(200).send(announcements);
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
@@ -112,3 +112,11 @@ export const deleteAnnouncement = async (req, res) => {
         res.status(500).send({ message: error.message });
     }
 }
+
+export const createAnnouncementJson = {
+    publisher: "examplepublisher",
+    title: "Example Title",
+    description: "Example Description",
+    eventId: "exampleEventId",
+    cover: "exampleCoverUrl"
+};

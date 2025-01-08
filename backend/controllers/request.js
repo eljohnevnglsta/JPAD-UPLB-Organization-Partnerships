@@ -42,7 +42,6 @@ export const Request = mongoose.model('Request', {
     }, message: {
         type: String,
         required: true,
-        default: ""
     },
     response: {
         type: String,
@@ -51,7 +50,7 @@ export const Request = mongoose.model('Request', {
 });
 
 export const createRequest = async (req, res) => {
-    const { publisher, invitee, eventId, partnershipType, attachments } = req.body;
+    const { publisher, invitee, eventId, partnershipType, attachments, message } = req.body;
     const requestId = new mongoose.Types.ObjectId().toHexString();
     try {
         await Request.create({
@@ -60,7 +59,8 @@ export const createRequest = async (req, res) => {
             invitee,
             eventId,
             partnershipType,
-            attachments 
+            message,
+            attachments
         });
         res.status(200).json({ message: "Request created successfully" });
     } catch (error) {
@@ -69,10 +69,10 @@ export const createRequest = async (req, res) => {
 }
 
 export const getRequestsByInvitee = async (req, res) => {
-    const { publisher } = req.body;
+    const { invitee } = req.body;
     try {
         const requests = await Request.find({ invitee });
-        res.status(200).json({ message: "Requests found", value: requests });
+        res.status(200).json(requests);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -82,7 +82,7 @@ export const getRequestsByPublisher = async (req, res) => {
     const { publisher } = req.body;
     try {
         const requests = await Request.find({ publisher });
-        res.status(200).json({ message: "Requests found", value: requests });
+        res.status(200).json(requests);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -93,7 +93,7 @@ export const getRequestById = async (req, res) => {
     try {
         const request = await Request.findOne({requestId});
         if (!request) return res.status(404).json({ message: "Request not found" });
-        res.status(200).json({ message: "Request found", value: request });
+        res.status(200).json(request);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -102,7 +102,7 @@ export const getRequestById = async (req, res) => {
 export const getAllRequests = async (req, res) => {
     try {
         const requests = await Request.find();
-        res.status(200).json({ message: "Requests found", value: requests });
+        res.status(200).json(requests);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

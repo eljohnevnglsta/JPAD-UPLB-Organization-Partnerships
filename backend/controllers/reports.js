@@ -9,8 +9,8 @@ try {
     console.log(error.message);
 }
 
-// reportedOrgId: ObjectId (refers to Organizations)
-// reporterId: ObjectId (refers to Users)
+// reportedOrg: ObjectId (refers to Organizations)
+// reporter: ObjectId (refers to Users)
 // reason: Enum ("Non-compliance", "Misconduct", “Unprofessional”, Others)
 // description: String
 // image: String URL
@@ -22,11 +22,11 @@ export const Report = mongoose.model('Report', {
         required: true,
         unique: true
     },
-    reportedOrgId: {
+    reportedOrg: {
         type: String,
         required: true
     },
-    reporterId: {
+    reporter: {
         type: String,
         required: true
     },
@@ -59,13 +59,13 @@ export const Report = mongoose.model('Report', {
 });
 
 export const createReport = async (req, res) => {
-    const { reportedOrgId, reporterId, reason, description, image } = req.body;
+    const { reportedOrg, reporter, reason, description, image } = req.body;
     const reportId = new mongoose.Types.ObjectId().toHexString();
     try {
         await Report.create({
             reportId,
-            reportedOrgId,
-            reporterId,
+            reportedOrg,
+            reporter,
             reason,
             description,
             image,
@@ -81,7 +81,7 @@ export const getReportById = async (req, res) => {
     const { reportId } = req.body;
     try {
         const report = await Report.findOne({ reportId });
-        res.status(200).send({ success: true, report });
+        res.status(200).send(report);
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
@@ -91,27 +91,27 @@ export const getReportById = async (req, res) => {
 export const getAllReports = async (req, res) => {
     try {
         const reports = await Report.find();
-        res.status(200).send({ success: true, reports });
+        res.status(200).send(reports);
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
 }
 
 export const getReportsByOrg = async (req, res) => {
-    const { reportedOrgId } = req.body;
+    const { reportedOrg } = req.body;
     try {
-        const reports = await Report.find({ reportedOrgId });
-        res.status(200).send({ success: true, reports });
+        const reports = await Report.find({ reportedOrg });
+        res.status(200).send(reports);
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
 }
 
 export const getReportsByReporter = async (req, res) => {
-    const { reporterId } = req.body;
+    const { reporter } = req.body;
     try {
-        const reports = await Report.find({ reporterId });
-        res.status(200).send({ success: true, reports });
+        const reports = await Report.find({ reporter });
+        res.status(200).send(reports);
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
@@ -130,6 +130,3 @@ export const updateReport = async (req, res) => {
         res.status(500).send({ message: error.message });
     }
 }
-
-//export all functions
-export default { createReport, getReportById, getAllReports, getReportsByOrg, getReportsByReporter, updateReport };
