@@ -12,7 +12,6 @@ const router = (app) => {
     // TODO: Add middleware for authentication
     app.post('/account/update', updateAccount);
     app.get('/account/get', getAccount);
-
     app.post('/event/create', createEvent);
     app.get('/event/get/all', getAllEvents);
     app.get('/event/get/id', getEventById);

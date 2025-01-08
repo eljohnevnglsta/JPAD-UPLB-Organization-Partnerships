@@ -73,7 +73,8 @@ export const Event = mongoose.model('Event', {
 // Create a new event
 export const createEvent = async (req, res) => {
     try {
-        const { eventId, publisher, title, description, startDate, endDate, otherDetails, cover, eventType } = req.body;
+        const { publisher, title, description, startDate, endDate, otherDetails, cover, eventType } = req.body;
+        const eventId = new mongoose.Types.ObjectId().toHexString();
         const newEvent = new Event({ eventId, publisher, title, description, startDate, endDate, otherDetails, cover, eventType });
         await newEvent.save();
         res.status(201).json({success: true, message: "Event created successfully"});
@@ -116,6 +117,7 @@ export const getEventById = async (req, res) => {
 }
 
 // Update an event
+// requirment {eventId, <attribute to update>}
 export const updateEvent = async (req, res) => {
     try {
         const { eventId, title, description, startDate, endDate, otherDetails, cover, eventType, isActive } = req.body;
