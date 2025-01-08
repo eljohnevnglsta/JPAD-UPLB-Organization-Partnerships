@@ -13,7 +13,8 @@ try {
 export const Account = mongoose.model('Account', {
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     email: {
         type: String,
@@ -62,6 +63,18 @@ export const Account = mongoose.model('Account', {
 export const registerAccount = async (req, res) => {
     try {
         const { name, email, password, role } = req.body;
+        // Check if email already exists
+        const existingAccount = await Account.findOne({ email });
+        if (existingAccount) return res.status(400).json({ message: "Email already taken" });
+
+        // Check if name already exists
+        if (role === "organization") {
+            const existingName = await Account.findOne({ name });
+            if (existingName) return res.status(400).json({ message: "Organization name already taken" });
+        }
+
+
+        // Hash password before saving
         let hashed = await bcrypt.hash(password, 10);
         const account = new Account({ name, email, password: hashed, role });
         await account.save();
@@ -85,8 +98,12 @@ export const loginAccount = async (req, res) => {
 
         // Generate token for authentication
         const token = jwt.sign({ email: account.email, role: account.role }, process.env.JWT_SECRET, { expiresIn: '24h' });
-        res.cookie('token', token, { httpOnly: true });
-
+        res.cookie('token', token, { 
+            maxAge: 15 * 24 * 60 * 60 * 1000, //ms format
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict'
+        });
 
         return res.json({ success: true, message: "Login successful" });
 
@@ -99,6 +116,7 @@ export const loginAccount = async (req, res) => {
 // Logout an account
 export const logoutAccount = async (req, res) => {
     try {
+        res.clearCookie('token');
         return res.json({ success: true, message: "Logout successful" });
     } catch (error) {
         console.log(error.message);
@@ -112,7 +130,28 @@ export const getAccount = async (req, res) => {
         const email = req.body.email;
         const account = await Account.findOne({ email });
         return res.json(account);
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({ message: error.message });
+    }
+}
 
+// Update account details
+export const updateAccount = async (req, res) => {
+    try {
+        const email = req.body.email;
+        let account = await Account.findOne({ email });
+        if (!account) return res.status(404).json({ message: "Account not found" });
+
+        if (req.body.password) account.password = req.body.password;
+        if (req.body.status) account.status = req.body.status;
+        if (req.body.bio) account.bio = req.body.bio;
+        if (req.body.profilePicture) account.profilePicture = req.body.profilePicture;
+        if (req.body.contactDetails) account.contactDetails = req.body.contactDetails;
+        if (req.body.requirements) account.requirements = req.body.requirements;
+        
+        await account.save();
+        return res.json({ updated: true, message: "Account updated successfully" });
     } catch (error) {
         console.log(error.message);
         return res.status(500).json({ message: error.message });
