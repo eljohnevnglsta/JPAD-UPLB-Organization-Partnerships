@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import "./profile.css"
+import "../stylesheets/profile.css"
 import ProfilePicture from "../components/ProfilePicture";
 import About from "../components/About";
 import SidePanel from "../components/SidePanel";
@@ -24,14 +24,15 @@ function Profile() {
         <ProfilePicture />
         <About />
       </div>
+      
       <div className="profile-body">
         <div className="body-side">
-          <ButtonProfile isPrivateView={true} onEditProfileClick={openModal}  onPartnerClick={openPartnerModal}/> {/* pass the functions to the buttons*/}
+          <ButtonProfile isPrivateView={false} onEditProfileClick={openModal}  onPartnerClick={openPartnerModal}/> {/* pass the functions to the buttons*/}
           <SidePanel />
         </div>
         <MainPanel />
-      </div>      
-      
+      </div>     
+
       {/* conditional rendering for modals */}
       {isModalOpen && <EditProfileModal onClose={closeModal} />}
       {isPartnerModalOpen && <PartnerModal onClose={closePartnerModal} />}

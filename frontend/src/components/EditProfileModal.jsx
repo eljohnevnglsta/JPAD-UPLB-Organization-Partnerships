@@ -41,8 +41,10 @@ function EditProfileModal(props) {
                 <input type="url" name="linkedin-link" placeholder="https://www.linkedin.com/your-profile"/>
             </label>
           </form>
+          <div className="modal-buttons">
             <button className="btn-close" type="button" onClick={handleClose}>Close</button> 
             <button className="btn-submit" type="submit" onClick={handleSubtmit}>Save Profile</button>
+          </div>
         </div>
       </div>
     );

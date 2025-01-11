@@ -8,10 +8,22 @@ function About() {
             <h1 className="org-name">Young Software Engineers' Society</h1>
             <h2 className="org-bio">Bridging the gap between the academe and the industry.</h2>
             <ul className="org-links-container">
-                <img src={mailIcon} className="links-icon"/><li className="org-links">Email</li>
-                <img src={linkIcon} className="links-icon"/><li className="org-links">Facebook</li>
-                <img src={linkIcon} className="links-icon"/><li className="org-links">Instagram</li>
-                <img src={linkIcon} className="links-icon"/><li className="org-links">LinkedIn</li>
+                <li className="org-links">
+                     <img src={mailIcon} className="links-icon"/> 
+                     Email
+                </li>
+                <li className="org-links">
+                    <img src={linkIcon} className="links-icon"/>
+                    Facebook
+                </li>
+                <li className="org-links">
+                    <img src={linkIcon} className="links-icon"/>
+                    Instagram
+                </li>
+                <li className="org-links">
+                    <img src={linkIcon} className="links-icon"/>
+                    LinkedIn
+                </li>
             </ul>
         </div>
     );

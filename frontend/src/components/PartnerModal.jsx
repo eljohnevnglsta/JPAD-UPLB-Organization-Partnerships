@@ -33,8 +33,10 @@ function PartnerModal(props) {
                         <input type="file" id="file-upload" />
                     </label>
                 </form>
-                <button className="btn-close" type="button" onClick={handleClose}>Close</button> 
-                <button className="btn-submit" type="submit" onClick={handleSubtmit}>Send Request</button>
+                <div className="modal-buttons">
+                    <button className="btn-close" type="button" onClick={handleClose}>Close</button> 
+                    <button className="btn-submit" type="submit" onClick={handleSubtmit}>Send Request</button>
+                </div>
             </div>
         </div>
     );
