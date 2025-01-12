@@ -20,6 +20,10 @@ export const Announcement = mongoose.model('Announcement', {
         type: String, // Email of the organization
         required: true
     },
+    announcementDate: {
+        type: Date,
+        default: Date.now
+    },    
     title: {
         type: String,
         required: true
