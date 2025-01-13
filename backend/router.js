@@ -13,34 +13,34 @@ const router = (app) => {
 
     // TODO: Add middleware for authentication
     app.post('/account/update', updateAccount);
-    app.get('/account/get', getAccount);
+    app.post('/account/get', getAccount);
     
     app.post('/event/create', createEvent);
     app.get('/event/get/all', getAllEvents);
-    app.get('/event/get/id', getEventById);
+    app.post('/event/get/id', getEventById);
     app.post('/event/update', updateEvent);
     app.post('/event/delete', deleteEvent);
-    app.get('/event/get/all/publisher', getEventsByPublisher);
+    app.post('/event/get/all/publisher', getEventsByPublisher);
 
     app.post('/announcement/create', createAnnouncement);
-    app.get('/announcement/get/id', getAnnouncementById);
+    app.post('/announcement/get/id', getAnnouncementById);
     app.get('/announcement/get/all', getAllAnnouncements);
-    app.get('/announcement/get/all/org', getAnnouncementsByOrg);
+    app.post('/announcement/get/all/org', getAnnouncementsByOrg);
     app.post('/announcement/update', updateAnnouncement);
     app.post('/announcement/delete', deleteAnnouncement);
 
     app.post('/request/create', createRequest);
     app.get('/request/get/all', getAllRequests);
-    app.get('/request/get/id', getRequestById);
-    app.get('/request/get/all/publisher', getRequestsByPublisher);
-    app.get('/request/get/all/invitee', getRequestsByInvitee);
+    app.post('/request/get/id', getRequestById);
+    app.post('/request/get/all/publisher', getRequestsByPublisher);
+    app.post('/request/get/all/invitee', getRequestsByInvitee);
     app.post('/request/update', updateRequest);
 
     app.post('/report/create', createReport);
-    app.get('/report/get/id', getReportById);
+    app.post('/report/get/id', getReportById);
     app.get('/report/get/all', getAllReports);
-    app.get('/report/get/all/org', getReportsByOrg);
-    app.get('/report/get/all/reporter', getReportsByReporter);
+    app.post('/report/get/all/org', getReportsByOrg);
+    app.post('/report/get/all/reporter', getReportsByReporter);
 }
 
 export default router;

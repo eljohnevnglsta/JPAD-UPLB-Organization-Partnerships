@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import "../stylesheets/profile.css"
-import ProfilePicture from "../components/ProfilePicture";
 import About from "../components/About";
 import SidePanel from "../components/SidePanel";
 import MainPanel from "../components/MainPanel";
@@ -20,10 +19,7 @@ function Profile() {
 
   return (
     <>
-      <div className="profile-about">
-        <ProfilePicture />
-        <About />
-      </div>
+      <About />
       
       <div className="profile-body">
         <div className="body-side">
