@@ -8,14 +8,8 @@ dotenv.config({ path: '../.env' });
 const app = express();
 app.use(cookieParser());
 
-// Define CORS options
-const corsOptions = {
-  origin: process.env.ALLOWEDORIGIN, // Allow only requests from this origin
-  credentials: true
-};
-
 // Apply CORS middleware with options
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
