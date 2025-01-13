@@ -7,6 +7,8 @@ import './index.css'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/* <Profile /> */}
-    <Management />
+    <div className="tailwind-scope"> 
+      <Management/>
+    </div>
   </StrictMode>,
 )
