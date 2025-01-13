@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ResponseModal from './ResponseModal';
+
+const userEmail = "exec@yses.org";
 
 export default function RequestContent({ partnership }) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [responseMessage, setResponseMessage] = useState('');
+
     if (!partnership) {
         return <p>No partnership selected.</p>;
     }
@@ -16,6 +22,22 @@ export default function RequestContent({ partnership }) {
         message,
         response,
     } = partnership;
+
+    // Handle form submission
+    const handleRespond = (action) => {
+        // Example logic for handling the response
+        console.log({
+            requestId,
+            action,
+            responseMessage,
+        });
+
+        // Close the modal after submission
+        setIsModalOpen(false);
+
+        // Reset response message
+        setResponseMessage('');
+    };
 
     return (
         <div className="p-10 w-full max-w-3xl bg-white shadow-lg rounded-lg">
@@ -33,7 +55,7 @@ export default function RequestContent({ partnership }) {
                 <p><strong>Event ID:</strong> {eventId}</p>
             </div>
 
-            {/* Publisher and Invitee Details */}
+            {/* Participants */}
             <div className="mb-6">
                 <h2 className="text-xl font-semibold">Participants</h2>
                 <p><strong>Publisher:</strong> {publisher}</p>
@@ -68,6 +90,36 @@ export default function RequestContent({ partnership }) {
                         ))}
                     </ul>
                 </div>
+            )}
+
+            {/* Respond and Cancel Buttons */}
+            {partnership.publisher === userEmail ? (
+                <button
+                    onClick={() => handleRespond('cancelled')}
+                    className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
+                >
+                    Cancel
+                </button>
+            ) : (
+                status === 'pending' && (
+                    <>
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                        >
+                            Respond
+                        </button>
+                        {isModalOpen && (
+                            <ResponseModal
+                                partnership={partnership}
+                                setIsModalOpen={setIsModalOpen}
+                                handleRespond={handleRespond}
+                                responseMessage={responseMessage}
+                                setResponseMessage={setResponseMessage}
+                            />
+                        )}
+                    </>
+                )
             )}
         </div>
     );

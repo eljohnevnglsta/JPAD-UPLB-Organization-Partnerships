@@ -19,8 +19,8 @@ export default function Management() {
             .then((response) => {
                 const fetchedIncoming = response.data.filter((partnership) => partnership.invitee === userEmail);
                 const fetchedOutgoing = response.data.filter((partnership) => partnership.publisher === userEmail);
-                const fetchedApproved = response.data.filter((partnership) => partnership.status === "approved" && partnership.publisher === userEmail);
-                const fetchedRejected = response.data.filter((partnership) => partnership.status === "rejected" && partnership.publisher === userEmail);
+                const fetchedApproved = response.data.filter((partnership) => partnership.status === "approved" && (partnership.publisher === userEmail || partnership.invitee === userEmail));
+                const fetchedRejected = response.data.filter((partnership) => partnership.status === "rejected" && (partnership.publisher === userEmail || partnership.invitee === userEmail));
 
                 // Update state
                 setIncoming(fetchedIncoming);
