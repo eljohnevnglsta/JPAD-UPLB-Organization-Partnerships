@@ -1,0 +1,314 @@
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f5f5f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+/* Profile Header */
+
+.profile-about {    
+    box-sizing: border-box;
+    margin: 0;
+    padding: 50px;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+    gap: 50px;
+    background-color: #282829;
+    color: #f5f5f7;
+}
+
+.profile-picture-container {
+    border: 12px solid #f5f5f7;
+    background-color: #f5f5f7;
+    border-radius: 50%;
+    width: 200px;      
+    height: 200px;     
+    overflow: hidden;  
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-picture {
+    width: 100%;       
+    height: 100%;      
+    object-fit: cover; /* keep aspect ratio of image but cover the entire container */
+}
+
+.about-org {
+    margin: 0;
+    padding: 0;
+    flex-shrink: 3;
+    flex-grow: 0;
+}
+
+.org-name {
+    font-size: 56px;
+    padding: 0;
+    margin: 0;
+}
+
+.org-bio {
+    font-size: 28px;
+    color: #d9d9d9;
+    padding: 0;
+    margin: 0;
+}
+
+.org-links-container {    
+    font-size: 8px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 30px;
+    align-items: center;    
+    font-size: 24px;
+}
+
+.org-links {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+}
+
+.links-icon {
+    width: 24px;
+    height: 24px;
+}
+
+@media (max-width: 1100px) {
+    .profile-about {
+        justify-content: center;
+    }
+    
+    .about-org {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .org-name {
+        font-size: 48px;
+    }
+    
+    .org-bio {
+        font-size: 22px;
+    }
+
+    .org-links-container {  
+        gap: 5px;
+    }
+}   
+
+/* Actual Body */
+
+.profile-body {
+    display: flex;
+}
+
+
+/* Side Panel */
+
+.body-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-partner, .btn-edit-profile {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 22px;
+    background-color: #0070e3;
+    border: none;
+    border-radius: 50px;
+    padding: 10px;
+    margin: 30px 0;
+    width: 250px;
+    color: #f5f5f7;
+    font-weight: bold;
+}
+
+.sidepanel {
+    background-color: #282829;
+    color: #f5f5f7;
+    width: 25vw;    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 50px;
+    margin: 0 calc(100vw/50); /* dynamic sizing i think */
+    padding: 0;
+}
+
+.current-events-header, .current-partnerships-header {
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.current-events-container, .current-partnerships-container {
+    padding: 0;
+    list-style-type: none;
+    text-decoration: underline;
+    text-align: center;
+    font-size: 18px;
+}
+
+.current-events-container {
+    padding: 0;
+}
+
+/* Main Panel */
+
+.card-post {
+    background-color: #d9d9d9;
+    margin: 30px;
+    padding: 30px;
+    border-radius: 50px;
+}
+
+
+@media (max-width: 1100px) {
+    .profile-body {
+        flex-wrap: wrap;
+    }
+
+    .body-side {
+        width: 100vw;
+    }
+
+    .sidepanel {
+        box-sizing: border-box;
+        width: 90vw;
+        margin: 10px; 
+    }
+}   
+
+/* Modals */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: hsla(0, 0%, 80%, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow-x: hidden;
+}
+
+.modal-content {
+    background-color: white;
+    box-sizing: border-box;
+    padding: 0 50px;
+    border-radius: 20px;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    overflow: hidden;
+}
+
+.partnership-request-header, .edit-profile-header {
+    font-size: 28px;
+}
+
+.partnership-form, .edit-profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.partnership-form label, .edit-profile-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.partnership-form input, .partnership-form textarea, .edit-profile-form input, .edit-profile-form textarea {
+    padding: 8px;
+    margin-top: 8px;
+    font-size: 18px;
+    font-family: 'Poppins', Arial, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #d9d9d9;
+}
+
+.partnership-form textarea {
+    height: 150px;
+    resize: none;
+}
+
+.edit-profile-form textarea {
+    height: 100px;
+    resize: none;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    margin: 30px 0;
+}
+
+.btn-close, .btn-submit {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 22px;
+    background-color: #282829;
+    border: none;
+    border-radius: 50px;
+    padding: 10px;
+    margin: 0;
+    width: 200px;
+    color: #f5f5f7;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        width: 90%;
+        padding: 0 20px;
+    }
+
+    .partnership-request-header, .edit-profile-header {
+        font-size: 24px;
+    }
+
+    .partnership-form input, .partnership-form textarea, .edit-profile-form input, .edit-profile-form textarea {
+        font-size: 16px;
+    }
+
+    .btn-close, .btn-submit {
+        width: 180px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .modal-content {
+        width: 80%;
+        padding: 0 30px;
+    }
+
+    .partnership-request-header, .edit-profile-header {
+        font-size: 26px;
+    }
+}
