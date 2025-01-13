@@ -5,57 +5,102 @@ import axios from 'axios';
 const userEmail = "exec@yses.org";
 
 export default function Management() {
-    // useState to store the partnerships
+    // State to store the partnerships
     const [partnerships, setPartnerships] = useState([]);
-    var incoming = [];
-    var outgoing = [];
+    const [incoming, setIncoming] = useState([]);
+    const [outgoing, setOutgoing] = useState([]);
+    const [approved, setApproved] = useState([]);
+    const [rejected, setRejected] = useState([]);
+
     useEffect(() => {
-        axios.get('http://localhost:3001/request/get/all').then((response) => {
-            incoming = response.data.filter((partnership) => partnership.invitee === userEmail);
-            outgoing = response.data.filter((partnership) => partnership.publisher === userEmail);
-            setPartnerships(outgoing);
-        }).catch((error) => {
-            console.log(error.message);
-        });
+        axios.get('http://localhost:3001/request/get/all')
+            .then((response) => {
+                const fetchedIncoming = response.data.filter((partnership) => partnership.invitee === userEmail);
+                const fetchedOutgoing = response.data.filter((partnership) => partnership.publisher === userEmail);
+                const fetchedApproved = response.data.filter((partnership) => partnership.status === "approved" && partnership.publisher === userEmail);
+                const fetchedRejected = response.data.filter((partnership) => partnership.status === "rejected" && partnership.publisher === userEmail);
+
+                // Update state
+                setIncoming(fetchedIncoming);
+                setOutgoing(fetchedOutgoing);
+                setApproved(fetchedApproved);
+                setRejected(fetchedRejected);
+                setPartnerships(fetchedIncoming); // Default to incoming
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
     }, []);
 
     return (
         <div className="flex w-screen h-screen">
-          <div className="w-1/3 border-r border-black flex flex-col">
-            <div className="border-b border-black h-16 flex items-center justify-center">
-                <p className="text-3xl font-sans-apple-system font-extrabold">your partnerships</p>
+            {/* Left Section */}
+            <div className="w-1/3 border-r border-black flex flex-col">
+                <div className="border-b border-black h-16 flex items-center justify-center">
+                    <p className="text-3xl font-sans-apple-system font-extrabold">your partnerships</p>
+                </div>
+
+                {/* Navigation Tabs */}
+                <div className="border-b border-black h-16 flex space-x-10 items-center justify-evenly p-10">
+                    <div
+                        className="flex flex-col items-center justify-center cursor-pointer"
+                        onClick={() => setPartnerships(incoming)}
+                    >
+                        <img
+                            className="w-10 h-10"
+                            src="https://img.icons8.com/?size=100&id=eVNSdU8gTUON&format=png&color=000000"
+                            alt="Request"
+                        />
+                        <p>requests</p>
+                    </div>
+
+                    <div
+                        className="flex flex-col items-center justify-center cursor-pointer"
+                        onClick={() => setPartnerships(outgoing)}
+                    >
+                        <img
+                            className="w-10 h-10"
+                            src="https://img.icons8.com/?size=100&id=7874&format=png&color=000000"
+                            alt="Sent"
+                        />
+                        <p>sent</p>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center"
+                        onClick={() => setPartnerships(approved)}
+                        >
+                        <img
+                            className="w-10 h-10"
+                            src="https://img.icons8.com/?size=100&id=12404&format=png&color=000000"
+                            alt="Approved"
+                        />
+                        <p>approved</p>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center"
+                        onClick={() => setPartnerships(rejected)}
+                        >
+                        <img
+                            className="w-10 h-10"
+                            src="https://img.icons8.com/?size=100&id=ZLZpTTLWyuCY&format=png&color=000000"
+                            alt="Rejected"
+                        />
+                        <p>rejected</p>
+                    </div>
+                </div>
+
+                {/* Partnership Summary List */}
+                <div className="flex-grow flex-col flex items-center justify-start">
+                    {partnerships.map((partnership) => (
+                        <PartnershipSummary key={partnership.requestId} partnership={partnership} />
+                    ))}
+                </div>
             </div>
-            <div className="border-b border-black h-16 flex space-x-10 items-center justify-evenly p-10">
-                <div className="flex flex-col items-center justify-center" onClick={() => {setPartnerships(incoming)}}>
-                    <img className="w-10 h-10" 
-                        src="https://img.icons8.com/?size=100&id=eVNSdU8gTUON&format=png&color=000000" 
-                        alt="Request"/>
-                    <p>requests</p></div>
-                <div className="flex flex-col items-center justify-center" onClick={() => {setPartnerships(outgoing)}}>
-                    <img className="w-10 h-10" 
-                        src="https://img.icons8.com/?size=100&id=7874&format=png&color=000000" 
-                        alt="Sent"/><p>sent</p></div>
-                <div className="flex flex-col items-center justify-center">
-                    <img className="w-10 h-10" 
-                        src="https://img.icons8.com/?size=100&id=12404&format=png&color=000000" 
-                        alt="Approved"/><p>approved</p></div>
-                <div className="flex flex-col items-center justify-center">
-                    <img className="w-10 h-10" 
-                        src="https://img.icons8.com/?size=100&id=ZLZpTTLWyuCY&format=png&color=000000" 
-                        alt="Rejected"/><p>rejected</p></div>
+
+            {/* Right Section */}
+            <div className="flex-grow border-l border-black flex items-center justify-center">
+                <p>Main Content Area</p>
             </div>
-            <div className="flex-grow flex-col flex items-center justify-start">
-                {console.log(partnerships)}
-                {partnerships.map((partnership) => (
-                    <PartnershipSummary key={partnership.requestId} partnership={partnership} />
-                ))}
-            </div>
-          </div>
-    
-          {/* Right Section */}
-          <div className="flex-grow border-l border-black flex items-center justify-center">
-            <p>Main Content Area</p>
-          </div>
         </div>
-      );
+    );
 }

@@ -32,7 +32,7 @@ export default function PartnershipSummary(props) {
     }, []);
 
     return (
-        <div className="flex flex-row justify-between items-center p-5 border-b border-gray-300 bg-white shadow-sm rounded-lg space-x-10">
+        <div className="flex flex-row justify-between items-center p-5 border-b border-gray-300 bg-white shadow-sm rounded-lg space-x-10" style={{ width: '400px' }}>
             <div className="flex items-center">
                 <img className="w-16 h-16 rounded-full object-cover mr-4"
                     src={publisher.profilePicture} alt="Publisher" />
