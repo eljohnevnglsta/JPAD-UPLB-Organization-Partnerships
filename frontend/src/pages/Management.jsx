@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import PartnershipSummary from '../components/PartnershipSummary';
 import axios from 'axios';
+import RequestContent from '../components/RequestContent';
 
 const userEmail = "exec@yses.org";
 
 export default function Management() {
-    // State to store the partnerships
+    // State to store partnerships and the selected partnership
     const [partnerships, setPartnerships] = useState([]);
     const [incoming, setIncoming] = useState([]);
     const [outgoing, setOutgoing] = useState([]);
     const [approved, setApproved] = useState([]);
     const [rejected, setRejected] = useState([]);
+    const [selectedPartnership, setSelectedPartnership] = useState(null); // New state
 
     useEffect(() => {
         axios.get('http://localhost:3001/request/get/all')
@@ -66,9 +68,10 @@ export default function Management() {
                         <p>sent</p>
                     </div>
 
-                    <div className="flex flex-col items-center justify-center"
+                    <div
+                        className="flex flex-col items-center justify-center cursor-pointer"
                         onClick={() => setPartnerships(approved)}
-                        >
+                    >
                         <img
                             className="w-10 h-10"
                             src="https://img.icons8.com/?size=100&id=12404&format=png&color=000000"
@@ -77,9 +80,10 @@ export default function Management() {
                         <p>approved</p>
                     </div>
 
-                    <div className="flex flex-col items-center justify-center"
+                    <div
+                        className="flex flex-col items-center justify-center cursor-pointer"
                         onClick={() => setPartnerships(rejected)}
-                        >
+                    >
                         <img
                             className="w-10 h-10"
                             src="https://img.icons8.com/?size=100&id=ZLZpTTLWyuCY&format=png&color=000000"
@@ -92,14 +96,24 @@ export default function Management() {
                 {/* Partnership Summary List */}
                 <div className="flex-grow flex-col flex items-center justify-start">
                     {partnerships.map((partnership) => (
-                        <PartnershipSummary key={partnership.requestId} partnership={partnership} />
+                        <div
+                            key={partnership.requestId}
+                            onClick={() => setSelectedPartnership(partnership)} // Set selected partnership
+                            className="cursor-pointer"
+                        >
+                            <PartnershipSummary partnership={partnership} />
+                        </div>
                     ))}
                 </div>
             </div>
 
             {/* Right Section */}
             <div className="flex-grow border-l border-black flex items-center justify-center">
-                <p>Main Content Area</p>
+                {selectedPartnership ? (
+                    <RequestContent partnership={selectedPartnership} /> // Pass selected partnership
+                ) : (
+                    <p>Select a partnership to view details</p>
+                )}
             </div>
         </div>
     );

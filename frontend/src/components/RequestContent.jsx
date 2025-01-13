@@ -1,0 +1,91 @@
+import React from 'react';
+
+export default function RequestContent({ partnership }) {
+    if (!partnership) {
+        return <p>No partnership selected.</p>;
+    }
+
+    const {
+        requestId,
+        publisher,
+        invitee,
+        eventId,
+        status,
+        partnershipType,
+        attachments,
+        message,
+        response,
+    } = partnership;
+
+    return (
+        <div className="p-10 w-full max-w-3xl bg-white shadow-lg rounded-lg">
+            {/* Header Section */}
+            <div className="mb-6 border-b pb-4">
+                <h1 className="text-3xl font-bold">Partnership Request</h1>
+                <p className="text-gray-600">Request ID: <span className="font-mono">{requestId}</span></p>
+            </div>
+
+            {/* Partnership Details Section */}
+            <div className="mb-6">
+                <h2 className="text-xl font-semibold">Partnership Details</h2>
+                <p><strong>Status:</strong> <span className={`text-${getStatusColor(status)}`}>{status}</span></p>
+                <p><strong>Type:</strong> {partnershipType}</p>
+                <p><strong>Event ID:</strong> {eventId}</p>
+            </div>
+
+            {/* Publisher and Invitee Details */}
+            <div className="mb-6">
+                <h2 className="text-xl font-semibold">Participants</h2>
+                <p><strong>Publisher:</strong> {publisher}</p>
+                <p><strong>Invitee:</strong> {invitee}</p>
+            </div>
+
+            {/* Message Section */}
+            <div className="mb-6">
+                <h2 className="text-xl font-semibold">Message</h2>
+                <p className="bg-gray-100 p-4 rounded-md">{message}</p>
+            </div>
+
+            {/* Response Section */}
+            {response && (
+                <div className="mb-6">
+                    <h2 className="text-xl font-semibold">Response</h2>
+                    <p className="bg-green-100 p-4 rounded-md">{response}</p>
+                </div>
+            )}
+
+            {/* Attachments Section */}
+            {attachments.length > 0 && (
+                <div className="mb-6">
+                    <h2 className="text-xl font-semibold">Attachments</h2>
+                    <ul className="list-disc list-inside">
+                        {attachments.map((attachment, index) => (
+                            <li key={index}>
+                                <a href={attachment} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+                                    Download Attachment {index + 1}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+        </div>
+    );
+}
+
+function getStatusColor(status) {
+    switch (status) {
+        case "approved":
+            return "green-600";
+        case "rejected":
+            return "red-600";
+        case "pending":
+            return "yellow-600";
+        case "completed":
+            return "blue-600";
+        case "cancelled":
+            return "gray-600";
+        default:
+            return "black";
+    }
+}
