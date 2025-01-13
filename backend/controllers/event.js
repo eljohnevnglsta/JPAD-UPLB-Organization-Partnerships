@@ -110,7 +110,7 @@ export const getEventById = async (req, res) => {
         const { eventId } = req.body;
         const event = await Event.findOne({ eventId });
         if (!event) return res.status(404).json({ message: "Event not found" });
-        res.status(200).json({success: true, message: "Event found", value: event});
+        res.status(200).json(event);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -120,11 +120,12 @@ export const getEventById = async (req, res) => {
 // requirment {eventId, <attribute to update>}
 export const updateEvent = async (req, res) => {
     try {
-        const { eventId, title, description, startDate, endDate, otherDetails, cover, eventType, isActive } = req.body;
+        const { eventId, title, partnerIds, description, startDate, endDate, otherDetails, cover, eventType, isActive } = req.body;
         const event = await Event.findOne({ eventId });
         if (!event) return res.status(404).json({ message: "Event not found" });
 
         event.title = title || event.title;
+        event.partnerIds = partnerIds || event.partnerIds;
         event.description = description || event.description;
         event.startDate = startDate || event.startDate;
         event.endDate = endDate || event.endDate;
