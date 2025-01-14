@@ -1,0 +1,644 @@
+
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f5f5f7;
+    padding: 0;
+    margin: 0 auto; 
+    display: flex;
+    box-sizing: border-box; 
+}
+
+
+/* Navigation Bar */
+.nav-header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #0c3e73;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+.nav-header .logo h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0c3e73;
+    margin: 0;
+    margin-right: 100px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-grow: 1; 
+    justify-content: flex-end;  
+    margin-left: 30px;  
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.nav-item h1 {
+    font-size: 18px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    margin: 0;
+}
+
+.nav-item h1:hover {
+    color: #0b578d;
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.search-icon:hover,
+.profile-picture:hover {
+    transform: scale(1.1);
+}
+
+.profile-picture {
+    width: 30px; 
+    height: 30px;  
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border-radius: 50%;
+}
+
+/* Mobile Styling */
+@media (max-width: 800px) {
+    .nav-links {
+        gap: 10px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-item h1 {
+        font-size: 16px;
+    }
+
+    .search-icon,
+    .profile-picture {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* Main Content (Main Panel + Side Panel)*/
+.main-content {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    height: calc(100vh - 50px); 
+    padding: 10px 20px;
+    gap: 10px; 
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+/* Posting content */
+.main-panel {
+    flex: 1;
+    padding: 50px;
+    overflow-y: auto;
+}
+
+.main-panel h1 {
+    font-size: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #0672e3;
+}
+
+/* Header Content (Welcome + Buttons) */
+.header-content {
+    display: flex; 
+    align-items: center; 
+    gap: 70px;
+    margin-bottom: 10px;
+}
+
+/* Buttons Container */
+.create-buttons {
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px;
+}
+
+.plus-icon {
+    font-size: 30px; 
+    font-weight: bold;
+}
+
+.btn-create-post {
+    padding: 10px 20px;
+    width: 200px;
+    background-color: #1a73e8;
+    color: white;
+    border-radius: 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    gap: 10px;
+}
+
+.btn-create-event {
+    padding: 10px 20px;
+    width: 200px;
+    background-color: #282829;
+    color: white;
+    border-radius: 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    gap: 10px;
+}
+
+.btn-create:hover {
+    background-color: #0b578d;
+    transform: scale(1.05);
+}
+
+/* Post Cards Section */
+.post-cards {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px; 
+    margin-top: 20px;
+}
+
+.post-cards h2 {
+    font-size: 25px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: #434344;
+}
+
+/* Individual Post Card Styling */
+.post-card {
+    background-color: #d9d9d9;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Post Header */
+.post-header {
+    display: flex;
+    align-items: center; 
+    gap: 15px; 
+}
+
+/* Profile Picture */
+.profile-picture {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover; 
+}
+
+/* Post Metadata */
+.post-meta h2 {
+    font-size: 15px;
+    color: #333;
+    margin: 0;
+}
+
+.post-date {
+    font-size: 15px;
+    color: #777;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Profile Picture */
+.clock-icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    object-fit: cover; 
+}
+
+.post-date i {
+    font-size: 15px;
+    color: #777;
+}
+
+/* Post Title */
+.post-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+/* Post Content */
+.post-content {
+    font-size: 15px;
+    color: #555;
+}
+
+.post-title b {
+    font-size: 24px;
+    color: #0c3e73;
+    text-align: center;
+    margin: 0;
+}
+
+/* Styles for the post image */
+.post-image img {
+    width: 100%; 
+    height: 350px; 
+    object-fit: cover; 
+    margin-top: 16px; 
+}
+
+.post-icon-container {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px; 
+    margin: 0; 
+    padding: 0; 
+}
+
+.post-icon {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    display: block;
+    margin: 0;
+    padding: 0; 
+}
+
+.org-logo {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    display: block;
+    margin: 0;
+    padding: 0; 
+}
+
+/* View More Button */
+.btn-view {
+    display: inline-block;
+    padding: 8px 16px;
+    width: auto;
+    background-color: #434344;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-view:hover {
+    background-color: #282829;
+    transform: scale(1.05);
+}
+
+/* Modal overlay background */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    width: 100%; 
+    max-width: 1200px; 
+    height: fit-content;  
+    border-radius: 10px;
+}
+
+/* Close Button */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #ff0000; 
+}
+
+/* Title */
+.modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0c3e73;
+    margin-bottom: 0px;
+}
+
+/* Modal Content Text */
+.modal-text {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Modal Content Text */
+.modal-text-content {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Post Image */
+.modal-image img {
+    width: 100%;
+    height: auto; 
+    object-fit: contain; 
+    margin-top: 20px;
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Profile Picture in Modal */
+.profile-picture-modal {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+/* Modal Body (Flexbox Layout for 2 Columns) */
+.modal-body {
+    display: flex;
+    gap: 20px; 
+    align-items: flex-start; 
+    margin-top: 20px;
+    height: 100%; 
+}
+
+/* Left Column: Post Image */
+.modal-image {
+    width: 45%; 
+    flex-shrink: 0; 
+    max-width: 450px; 
+    height: auto;
+    object-fit: contain;
+}
+
+/* Right Column: Post Details */
+.modal-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%; 
+}
+
+/* Text Content */
+.modal-text-content {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* Specific Class for Post with Image */
+.modal-content-with-image {
+    height: 600px; 
+    max-height: none; 
+}
+
+/* Sidebar */
+.side-panel {
+    padding: 30px;
+    width: auto;
+    overflow-y: auto;
+}
+
+/* Notifications */
+.notifications-box {
+    width: 350px; 
+    height: 380px;
+    padding: 20px;
+    background-color: #77ace7;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    flex-shrink: 0; 
+}
+.notifications-box h2 {
+    text-align: center;
+    font-size: 25px;
+}
+
+/* Notification Cards */
+.notifications {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.notification-card {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 15px;
+    transition: transform 0.2s ease;
+}
+
+.notification-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Number Boxes */
+.number-box-1, .number-box-2, .number-box-3 {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+.number-box-1 { background-color: #0672e3; }
+.number-box-2 { background-color: #d53736; }
+.number-box-3 { background-color: #1a8f2b; }
+
+/* Descriptions */
+.description {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Highlight for notifications */
+.highlight {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.highlight.new {
+    color: #1a73e8; 
+}
+.highlight.rejected {
+    color: #d93025; 
+}
+.highlight.accepted {
+    color: #34a853; 
+}
+
+/* Partnerships Tab Button*/
+.partnerships {
+    text-align: center; 
+    margin-top: 20px;  
+}
+
+.btn-partnerships {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #434344; 
+    color: #fff;               
+    text-decoration: none;    
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;        
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-partnerships:hover {
+    background-color: #282829; 
+    transform: scale(1.05);    
+}
+
+/* Top Organizations Section */
+.top-organizations {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.top-organizations h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Organization Cards Container */
+.org-cards-container {
+    display: grid;
+    width: 350px;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+    gap: 10px;
+    justify-items: center;
+}
+
+/* Individual Organization Card */
+.org-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #434344;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 90px; /* Adjust based on your preference */
+}
+
+.org-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Organization Logo */
+.org-picture {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Organization Name */
+.org-name {
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .nav-header nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .notifications-box, .org-card {
+        width: 100%;
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .post-cards {
+        gap: 10px;
+    }
+}
+
+
+
