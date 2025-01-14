@@ -143,6 +143,7 @@ export const updateAccount = async (req, res) => {
         let account = await Account.findOne({ email });
         if (!account) return res.status(404).json({ message: "Account not found" });
 
+        if (req.body.name) account.name = req.body.name;
         if (req.body.password) account.password = req.body.password;
         if (req.body.status) account.status = req.body.status;
         if (req.body.bio) account.bio = req.body.bio;

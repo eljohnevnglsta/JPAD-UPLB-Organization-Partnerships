@@ -56,7 +56,8 @@ function About() {
                         .map(([platform, url]) => (
                             <li className="org-links" key={platform}>
                                 <img src={linkIcon} className="links-icon" alt="Link" />
-                                <a href={`https://${url}`} target="_blank" rel="noopener noreferrer">
+                                <a href={ url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`} // add the https if the link doesn't start with it
+                                target="_blank" rel="noopener noreferrer">
                                     {platform}
                                 </a>
                             </li>
