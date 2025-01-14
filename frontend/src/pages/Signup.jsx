@@ -14,12 +14,12 @@ const Signup = ({ setCurrentPage }) => {
     console.log('Signup Submitted', { email, name, password, confirmPassword, accountType, osaId });
   };
 
-  const toggleOrganizationField = () => {
-    const orgField = document.getElementById('organization-field');
-    if (accountType === 'organization') {
-      orgField.style.display = 'block';
+  const handleAccountTypeChange = (value) => {
+    // Toggle selection if the same radio button is clicked again
+    if (value === accountType) {
+      setAccountType(''); // Deselect the radio button (reset state)
     } else {
-      orgField.style.display = 'none';
+      setAccountType(value); 
     }
   };
 
@@ -88,7 +88,8 @@ const Signup = ({ setCurrentPage }) => {
                   id="organization"
                   name="account-type"
                   value="organization"
-                  onClick={() => setAccountType('organization')}
+                  checked={accountType === 'organization'}
+                  onChange={() => handleAccountTypeChange('organization')}
                 />
                 <label htmlFor="organization">Organization</label>
 
@@ -97,21 +98,25 @@ const Signup = ({ setCurrentPage }) => {
                   id="individual"
                   name="account-type"
                   value="individual"
-                  onClick={() => setAccountType('individual')}
+                  checked={accountType === 'individual'}
+                  onChange={() => handleAccountTypeChange('individual')}
                 />
                 <label htmlFor="individual">Individual</label>
               </div>
 
-              <div id="organization-field" style={{ display: 'none' }}>
-                <label htmlFor="osa-id">OSA Org ID (For verification):</label>
-                <input
-                  type="text"
-                  id="osa-id"
-                  placeholder="Enter your OSA Org ID"
-                  value={osaId}
-                  onChange={(e) => setOsaId(e.target.value)}
-                />
-              </div>
+              {/* Show the OSA Org ID input only if 'organization' is selected */}
+              {accountType === 'organization' && (
+                <div id="organization-field">
+                  <label htmlFor="osa-id">OSA Org ID (For verification):</label>
+                  <input
+                    type="text"
+                    id="osa-id"
+                    placeholder="Enter your OSA Org ID"
+                    value={osaId}
+                    onChange={(e) => setOsaId(e.target.value)}
+                  />
+                </div>
+              )}
 
               <button type="submit" className="auth-button">Sign Up</button>
             </form>

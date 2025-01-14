@@ -2,22 +2,22 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* Ensure full height */
-  width: 100%; /* Ensure full width */
+  height: 100%;
+  width: 100%; 
   font-family: 'Poppins', Arial, sans-serif;
   background-color: #f4f4f9;
   display: flex;
-  flex-direction: column; /* Added to enable full height layout */
+  flex-direction: column; 
+  overflow-x: hidden; 
 }
-
 
 #root {
   height: 100%;
-  width: 100%; 
+  width: 100%;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden; 
 }
-
 /* Navigation Bar */
 .navbar {
   width: 100%;
@@ -138,27 +138,52 @@ input:focus {
   border-color: #0071e3;
 }
 
+
+/* General styling for the radio button */
 .account-type input[type="radio"] {
   appearance: none;
   -webkit-appearance: none;
   background-color: white;
-  border: 2px solid #0071e3;
+  border: 3.5px solid #0071e3;
   width: 20px;
   height: 20px;
-  border-radius: 50%;
+  border-radius: 80%;
   display: inline-block;
   position: relative;
   cursor: pointer;
   margin-right: 10px;
+  transition: all 0.3s ease;
 }
 
+/* When the radio button is checked */
 .account-type input[type="radio"]:checked {
   background-color: #0071e3;
-  border-color: #0071e3;
+  border-color: #fff;  
 }
 
+/* When the radio button is focused */
+.account-type input[type="radio"]:focus {
+  border-color: white;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+}
+
+/* Adding a hover effect */
+.account-type input[type="radio"]:hover {
+  border-color: #00bcd4;
+}
+
+/* Style for the label of the radio buttons */
 .account-type label {
-  cursor: pointer;
+  font-size: 1rem;
+  font-weight: normal;
+  margin-right: 15px;
+  color: white; 
+  transition: color 0.2s ease;
+}
+
+
+.account-type input[type="radio"]:hover {
+  color: #00bcd4;
 }
 
 .auth-button {
@@ -169,7 +194,7 @@ input:focus {
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s;
 }
 
 .auth-button:hover {
@@ -215,7 +240,7 @@ input:focus {
   font-weight: bold;
 }
 
-/* Right Section - Preventing overlap */
+/* Right Section */
 .login-right {
   flex: 1;
   display: flex;
@@ -226,7 +251,7 @@ input:focus {
   overflow: hidden; 
 }
 
-/* Authentication Container - Add Margin Top to Lower the Box */
+/* Authentication Container */
 .auth-container {
   background: #0071e3;
   padding: 2rem;
@@ -238,8 +263,7 @@ input:focus {
   z-index: 1;
   min-height: 90%;
   height: auto;
-  margin-top: 50px; /* Adjust this value to control how much lower the box is */
-  /* Optional: Add padding-bottom if you want the box to extend infinitely */
+  margin-top: 50px; 
 }
 
 /* Login Form Styles */

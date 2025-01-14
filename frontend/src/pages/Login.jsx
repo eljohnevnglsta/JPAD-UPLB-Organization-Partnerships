@@ -8,7 +8,18 @@ const Login = ({ setCurrentPage }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Login Submitted', { email, password });
+    
+    // Dummy credentials 
+    const correctEmail = 'user@example.com';
+    const correctPassword = 'password123';
+
+    // Check if the entered credentials match the dummy credentials
+    if (email !== correctEmail || password !== correctPassword) {
+      setErrorMessage('Invalid credentials!');  // Show the error message
+    } else {
+      setErrorMessage('');  // Clear any existing error message
+      console.log('Login Submitted', { email, password });
+    }
   };
 
   return (
@@ -50,6 +61,8 @@ const Login = ({ setCurrentPage }) => {
               />
               
               <button type="submit" className="auth-button">Log In</button>
+
+              {/* Display error message if credentials are invalid */}
               {errorMessage && <p className="error-message">{errorMessage}</p>}
             </form>
           </div>
