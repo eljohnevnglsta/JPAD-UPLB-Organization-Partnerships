@@ -1,5 +1,7 @@
 import Header from "./MainHeader";
 import CardPost from "./HomeCardPost";
+import ShowMoreButton from "./ShowMoreButton";
+
 
 function HomeMainPanel(){
 
@@ -7,6 +9,7 @@ function HomeMainPanel(){
         <div className="main-panel">
             <Header />
             <CardPost />
+            <ShowMoreButton/>
         </div>
     )
 }
