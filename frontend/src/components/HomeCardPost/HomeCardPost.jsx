@@ -13,24 +13,32 @@ function HomeCardPost() {
     useEffect(() => {
         axios.get('http://localhost:3001/announcement/get/all')
             .then((response) => {
-                const postsWithPublisherName = response.data.map(post => ({
+                const postsWithPublisherData = response.data.map(post => ({
                     ...post,
-                    publisherName: ''
+                    publisherName: '',
+                    publisherProfilePicture: ProfilePicture // Use default profile picture initially
                 }));
-                setPosts(postsWithPublisherName);
-                // Fetch publisher names for each post
-                postsWithPublisherName.forEach(post => {
+                setPosts(postsWithPublisherData);
+
+                // Fetch publisher details (name and profile picture) for each post
+                postsWithPublisherData.forEach(post => {
                     axios.post('http://localhost:3001/account/get', { email: post.publisher })
                         .then((response) => {
-                            const publisherName = response.data ? response.data.name : 'Unknown';
-                            setPosts(prevPosts => 
-                                prevPosts.map(p => 
-                                    p.announcementId === post.announcementId ? { ...p, publisherName } : p
+                            const publisherData = response.data || {};
+                            setPosts(prevPosts =>
+                                prevPosts.map(p =>
+                                    p.announcementId === post.announcementId
+                                        ? {
+                                            ...p,
+                                            publisherName: publisherData.name || 'Unknown',
+                                            publisherProfilePicture: publisherData.profilePicture || ProfilePicture
+                                        }
+                                        : p
                                 )
                             );
                         })
                         .catch((error) => {
-                            console.error('Error fetching publisher name:', error);
+                            console.error('Error fetching publisher details:', error);
                         });
                 });
             })
@@ -56,9 +64,13 @@ function HomeCardPost() {
                 posts.map((post) => (
                     <div className="post-card" key={post.announcementId}>
                         <div className="post-header">
-                            <img className="profile-picture" src={ProfilePicture} alt="Profile picture" />
+                            <img
+                                className="profile-picture"
+                                src={post.publisherProfilePicture}
+                                alt="Profile picture"
+                            />
                             <div className="post-meta">
-                                <h2>{post.publisherName || 'Loading...'}</h2> {/* Show 'Loading...' while fetching name */}
+                                <h2>{post.publisherName || 'Loading...'}</h2>
                                 <div className="post-date">
                                     <img className="clock-icon" src={clockIcon} alt="Clock Icon" />
                                     {new Date(post.announcementDate).toLocaleString()}
@@ -69,14 +81,12 @@ function HomeCardPost() {
                         <h3 className="post-title">{post.title}</h3>
                         <p className="post-content">{post.description.substring(0, 200)}...</p>
 
-                        {/* Show "View More" button only if description exists */}
                         {post.description && (
                             <button className="btn-view" onClick={() => openModal(post)}>
                                 View More
                             </button>
                         )}
 
-                        {/* Display cover image if available */}
                         {post.cover && (
                             <div className="post-image">
                                 <img src={post.cover} alt="Post visual" />
@@ -88,7 +98,6 @@ function HomeCardPost() {
                 <p>No announcements available.</p>
             )}
 
-            {/* View More Modal */}
             {selectedPost && (
                 <ViewMoreModal
                     isOpen={isModalOpen}
