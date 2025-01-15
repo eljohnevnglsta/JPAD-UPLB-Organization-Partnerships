@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import "../stylesheets/profile.css"
+import "../stylesheets/Profile.css"
 import ProfilePicture from "../components/ProfilePicture";
 import About from "../components/About";
 import SidePanel from "../components/SidePanel";
