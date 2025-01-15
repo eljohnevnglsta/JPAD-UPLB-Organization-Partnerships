@@ -9,6 +9,7 @@ import './index.css'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Search />
+    {/* <Home /> */}
     {/* <Profile /> */}
     {/*<div className="tailwind-scope"> 
       <Management/>

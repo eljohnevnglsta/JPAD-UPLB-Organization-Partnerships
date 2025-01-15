@@ -1,20 +1,19 @@
-import "../stylesheets/Search.css"
+import "../stylesheets/Search.css";
 import NavigationBar from "../components/NavigationBar/NavigationBar";
 import SearchBar from "../components/SearchBar";
 
 function Search() {
 
     return (
-        <div className="search-page">
-            <div className="search-page-header">
+        <>
+            <div className="search-page-nav-bar">
                 <NavigationBar />
             </div>
-            <div className="search-page-main">
+            <div className="search-page-content">
                 <SearchBar />
             </div>
-        </div>
+        </>
     );
     
 }
-
 export default Search;
