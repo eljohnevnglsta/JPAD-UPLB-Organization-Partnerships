@@ -66,21 +66,20 @@ export const registerAccount = async (req, res) => {
         const { name, email, password, role } = req.body;
         // Check if email already exists
         const existingAccount = await Account.findOne({ email });
-        if (existingAccount) return res.status(400).json({ message: "Email already taken" });
+        if (existingAccount) return res.json({ success: false, message: "Email already taken" });
 
         // Check if name already exists
         if (role === "organization") {
             const existingName = await Account.findOne({ name });
-            if (existingName) return res.status(400).json({ message: "Organization name already taken" });
+            if (existingName) return res.json({ success: false, message: "Organization name already taken" });
         }
-
 
         // Hash password before saving
         let hashed = await bcrypt.hash(password, 10);
         const account = new Account({ name, email, password: hashed, role });
         await account.save();
         
-        return res.json({ message: "Account registered successfully" });
+        return res.json({ success: true, message: "Account registered successfully" });
     } catch (error) {
         console.log(error.message);
         return res.status(500).json({ message: error.message });

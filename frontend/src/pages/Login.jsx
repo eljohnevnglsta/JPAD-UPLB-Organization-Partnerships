@@ -25,7 +25,6 @@ const Login = ({ setCurrentPage }) => {
           // get accont details
           axios.post ('http://localhost:3001/account/get', { email: email })
           .then((response) => {
-            console.log(response.data);
             // store account details in local storage
             localStorage.setItem('account', JSON.stringify(response.data));
           }). catch((error) => {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../stylesheets/styles.css'; 
+import axios from 'axios';
 
 const Signup = ({ setCurrentPage }) => {
   const [email, setEmail] = useState('');
@@ -11,7 +12,51 @@ const Signup = ({ setCurrentPage }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Signup Submitted', { email, name, password, confirmPassword, accountType, osaId });
+    // Check if the passwords match
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+
+    // Check if the account type is selected
+    if (!accountType) {
+      alert('Please select an account type');
+      return;
+    }
+
+    // Check if the OSA Org ID is entered for organization accounts
+    if (accountType === 'organization' && !osaId) {
+      alert('Please enter your OSA Org ID');
+      return;
+    }
+
+    // Send the form data to the backend
+    axios.post('http://localhost:3001/account/register', {
+      email,
+      name,
+      password,
+      role: accountType
+    }).then((response) => {
+      if (response.data.success) {
+        alert('Account created successfully');
+        // get accont details
+        axios.post ('http://localhost:3001/account/get', { email: email })
+        .then((response) => {
+          console.log(response.data);
+          // store account details in local storage
+          localStorage.setItem('account', JSON.stringify(response.data));
+        }). catch((error) => {
+          console.log(error.message);
+        });
+
+        // TODO: Redirect to dashboard
+
+      } else {
+        alert(response.data.message);
+      }
+    }).catch((error) => {
+      alert('Error creating account');
+    });
   };
 
   const handleAccountTypeChange = (value) => {

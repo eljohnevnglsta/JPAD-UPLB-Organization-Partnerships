@@ -9,8 +9,8 @@ import './index.css'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/* <Profile /> */}
-    <Login />
-    {/* <Signup /> */}
+    {/* <Login /> */}
+    <Signup />
     <div className="tailwind-scope"> 
       <Management />  
     </div>
