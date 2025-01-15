@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../stylesheets/Profile.css'
 import axios from 'axios';
 import mailIcon from '../assets/mail-icon.png';
 import linkIcon from '../assets/link-icon.png';
@@ -25,13 +26,13 @@ function About() {
         <div className='profile-about'>
             {/* profile pic */}
             <div className='profile-picture-container'>
-                <img className="profile-picture" src={orgData.profilePicture || profilePicture} alt="Profile picture" />
+                <img className="profile-picture-profile-page" src={orgData.profilePicture || profilePicture} alt="Profile picture" />
             </div>
 
             {/* about the org */}
             <div className="about-org">
-                <h1 className="org-name">{orgData.name}</h1>  
-                <h2 className="org-bio">{orgData.bio}</h2>
+                <h1 className="org-name-profile-page">{orgData.name}</h1>  
+                <h2 className="org-bio-profile-page">{orgData.bio}</h2>
 
                 <div className="org-links-container">
                     {/* email */}
