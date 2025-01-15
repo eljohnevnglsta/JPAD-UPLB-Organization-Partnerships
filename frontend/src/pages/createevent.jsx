@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import "../stylesheets/createevent.css";
 
 function CreateEvent() {
     // State for each form field
