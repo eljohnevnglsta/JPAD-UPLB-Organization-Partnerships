@@ -1,5 +1,5 @@
 import "../stylesheets/Home.css"
-import NavigationBar from "../components/NavigationBar";
+import NavigationBar from "../components/NavigationBar/NavigationBar";
 import MainPanel from "../components/HomeMainPanel";
 import SidePanel from "../components/HomeSidePanel";
 

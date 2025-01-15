@@ -1,12 +1,12 @@
 import Header from "./MainHeader";
-import CardPost from "./HomeCardPost";
+import CardPost from "./HomeCardPost/HomeCardPost";
 
 function HomeMainPanel(){
 
     return(
         <div className="main-panel">
             <Header />
-            <CardPost />
+            {/* <CardPost /> */}
         </div>
     )
 }

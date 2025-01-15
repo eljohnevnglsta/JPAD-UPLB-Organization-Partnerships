@@ -154,6 +154,7 @@ export const updateAccount = async (req, res) => {
         let account = await Account.findOne({ email });
         if (!account) return res.status(404).json({ message: "Account not found" });
 
+        if (req.body.name) account.name = req.body.name;
         if (req.body.password) {
             let hashed = await bcrypt.hash(req.body.password, 10);
             account.password = hashed;

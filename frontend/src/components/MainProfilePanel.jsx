@@ -1,4 +1,4 @@
-import CardPost from "./CardPost"
+import CardPost from "./HomeCardPost/HomeCardPost"
 
 function MainPanel() {
 

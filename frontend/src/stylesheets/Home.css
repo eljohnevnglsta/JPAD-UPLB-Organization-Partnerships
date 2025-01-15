@@ -635,10 +635,6 @@ body {
         flex-direction: column;
         gap: 20px;
     }
-
-    .post-cards {
-        gap: 10px;
-    }
 }
 
 
