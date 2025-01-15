@@ -8,7 +8,7 @@ import { createReport, getReportById, getAllReports, getReportsByOrg, getReports
 // For example: Use the path "localhost:3000/account/register" to register an account.
 const router = (app) => {
     app.post('/account/register', registerAccount);
-    app.get('/account/login', loginAccount);
+    app.post('/account/login', loginAccount);
     app.get('/account/logout', logoutAccount);
 
     // TODO: Add middleware for authentication

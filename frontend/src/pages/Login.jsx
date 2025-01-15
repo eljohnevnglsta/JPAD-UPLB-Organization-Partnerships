@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../stylesheets/styles.css';
+import axios from 'axios';
 
 const Login = ({ setCurrentPage }) => {
   const [email, setEmail] = useState('');
@@ -8,18 +9,41 @@ const Login = ({ setCurrentPage }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Dummy credentials 
-    const correctEmail = 'user@example.com';
-    const correctPassword = 'password123';
+    axios
+      .post('http://localhost:3001/account/login', {
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        console.log(response.data);
 
-    // Check if the entered credentials match the dummy credentials
-    if (email !== correctEmail || password !== correctPassword) {
-      setErrorMessage('Invalid credentials!');  // Show the error message
-    } else {
-      setErrorMessage('');  // Clear any existing error message
-      console.log('Login Submitted', { email, password });
-    }
+        // Handle success
+        if (response.data.success) {
+          alert('Login successful!');
+          setErrorMessage('');
+
+          // get accont details
+          axios.post ('http://localhost:3001/account/get', { email: email })
+          .then((response) => {
+            console.log(response.data);
+            // store account details in local storage
+            localStorage.setItem('account', JSON.stringify(response.data));
+          }). catch((error) => {
+            console.log(error.message);
+          });
+
+          // TODO: Redirect to dashboard
+          
+        } else {
+          // Handle invalid credentials
+          alert('Invalid credentials!');
+          setErrorMessage('Invalid credentials!');
+        }
+      })
+      .catch((error) => {
+        // Handle server error
+        setErrorMessage('An error occurred. Please try again later.');
+      });
   };
 
   return (
@@ -35,7 +59,9 @@ const Login = ({ setCurrentPage }) => {
 
       <div className="login-page">
         <div className="login-left">
-          <h1><span className="bold">Login</span> to your account</h1>
+          <h1>
+            <span className="bold">Login</span> to your account
+          </h1>
         </div>
         <div className="login-right">
           <div className="auth-container">
@@ -49,7 +75,7 @@ const Login = ({ setCurrentPage }) => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              
+
               <label htmlFor="password">Password</label>
               <input
                 type="password"
@@ -59,11 +85,11 @@ const Login = ({ setCurrentPage }) => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              
+
               <button type="submit" className="auth-button">Log In</button>
 
               {/* Display error message if credentials are invalid */}
-              {errorMessage && <p className="error-message">{errorMessage}</p>}
+              {errorMessage && <p className="error-message">{errorMessage} HIII</p>}
             </form>
           </div>
         </div>

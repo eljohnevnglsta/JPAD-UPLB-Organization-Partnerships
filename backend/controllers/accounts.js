@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 dotenv.config({ path: '../.env' });
 
 try {
@@ -91,10 +92,10 @@ export const loginAccount = async (req, res) => {
     try {
         const { email, password } = req.body;
         const account = await Account.findOne({ email });
-        if (!account) return res.status(404).json({ message: "Account not found" });
+        if (!account) return res.status(404).json({ success: false, message: "Account not found" });
         
         let match = await bcrypt.compare(password, account.password);
-        if (!match) return res.status(401).json({ message: "Invalid credentials" });
+        if (!match) return res.json({ success: false, message: "Invalid credentials" });
 
         // Generate token for authentication
         const token = jwt.sign({ email: account.email, role: account.role }, process.env.JWT_SECRET, { expiresIn: '24h' });
@@ -143,7 +144,10 @@ export const updateAccount = async (req, res) => {
         let account = await Account.findOne({ email });
         if (!account) return res.status(404).json({ message: "Account not found" });
 
-        if (req.body.password) account.password = req.body.password;
+        if (req.body.password) {
+            let hashed = await bcrypt.hash(req.body.password, 10);
+            account.password = hashed;
+        }
         if (req.body.status) account.status = req.body.status;
         if (req.body.bio) account.bio = req.body.bio;
         if (req.body.profilePicture) account.profilePicture = req.body.profilePicture;
