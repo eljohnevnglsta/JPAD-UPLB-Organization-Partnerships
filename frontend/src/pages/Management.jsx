@@ -35,7 +35,8 @@ export default function Management() {
     }, []);
 
     return (
-        <div className="flex w-screen h-screen">
+        <div className='tailwind-scope'>
+            <div className="flex w-screen h-screen">
             {/* Left Section */}
             <div className="w-1/3 border-r border-black flex flex-col">
                 <div className="border-b border-black h-16 flex items-center justify-center">
@@ -115,6 +116,7 @@ export default function Management() {
                     <p>Select a partnership to view details</p>
                 )}
             </div>
+        </div>  
         </div>
     );
 }

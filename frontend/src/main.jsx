@@ -6,6 +6,8 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Management from './pages/Management';
+import CreateEvent from './pages/createevent';
+import CreatePost from './pages/createpost';
 import './index.css';
 
 createRoot(document.getElementById('root')).render(
@@ -17,6 +19,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/management" element={<Management />} />
+        <Route path="/createevent" element={<CreateEvent />} />
+        <Route path="/createpost" element={<CreatePost />} />
       </Routes>
     </Router>
   </StrictMode>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../stylesheets/styles.css';
+import '../stylesheets/LoginSignup.css';
 import axios from 'axios';
 
 const Login = ({ setCurrentPage }) => {

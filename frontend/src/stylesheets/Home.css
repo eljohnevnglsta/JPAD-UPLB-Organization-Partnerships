@@ -159,10 +159,12 @@ body {
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
     gap: 10px;
+    cursor: pointer;
 }
 
 .btn-create-event {
     padding: 10px 20px;
+    cursor: pointer;
     width: 200px;
     background-color: #282829;
     color: white;
