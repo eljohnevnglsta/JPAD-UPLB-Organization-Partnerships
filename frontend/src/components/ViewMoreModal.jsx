@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProfilePicture from '../assets/YSES-logo.png';
 
-function ViewMoreModal({ isOpen, onClose, postDetails }) {
+function ViewMoreModal({ isOpen, onClose, postDetails, accountName}) {
     if (!isOpen) return null;
 
     return (
@@ -28,7 +28,7 @@ function ViewMoreModal({ isOpen, onClose, postDetails }) {
 
                     <div className="w-1/2">
                         <p className="mb-2">
-                            <strong>Publisher:</strong> {postDetails.publisher}
+                            <strong>Publisher:</strong> {accountName}
                         </p>
                         <p className="mb-2">
                             <strong>Date:</strong> {new Date(postDetails.announcementDate).toLocaleString()}

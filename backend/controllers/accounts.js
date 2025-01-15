@@ -136,6 +136,17 @@ export const getAccount = async (req, res) => {
     }
 }
 
+// Get all accounts
+export const getAllAccounts = async (req, res) => {
+    try {
+        const accounts = await Account.find();
+        return res.json(accounts);
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({ message: error.message });
+    }
+}
+
 // Update account details
 export const updateAccount = async (req, res) => {
     try {

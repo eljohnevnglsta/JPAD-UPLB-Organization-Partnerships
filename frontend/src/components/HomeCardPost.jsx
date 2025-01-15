@@ -13,7 +13,26 @@ function HomeCardPost() {
     useEffect(() => {
         axios.get('http://localhost:3001/announcement/get/all')
             .then((response) => {
-                setPosts(response.data);
+                const postsWithPublisherName = response.data.map(post => ({
+                    ...post,
+                    publisherName: ''
+                }));
+                setPosts(postsWithPublisherName);
+                // Fetch publisher names for each post
+                postsWithPublisherName.forEach(post => {
+                    axios.post('http://localhost:3001/account/get', { email: post.publisher })
+                        .then((response) => {
+                            const publisherName = response.data ? response.data.name : 'Unknown';
+                            setPosts(prevPosts => 
+                                prevPosts.map(p => 
+                                    p.announcementId === post.announcementId ? { ...p, publisherName } : p
+                                )
+                            );
+                        })
+                        .catch((error) => {
+                            console.error('Error fetching publisher name:', error);
+                        });
+                });
             })
             .catch((error) => {
                 console.error('Error fetching announcements:', error);
@@ -39,7 +58,7 @@ function HomeCardPost() {
                         <div className="post-header">
                             <img className="profile-picture" src={ProfilePicture} alt="Profile picture" />
                             <div className="post-meta">
-                                <h2>{post.publisher}</h2>
+                                <h2>{post.publisherName || 'Loading...'}</h2> {/* Show 'Loading...' while fetching name */}
                                 <div className="post-date">
                                     <img className="clock-icon" src={clockIcon} alt="Clock Icon" />
                                     {new Date(post.announcementDate).toLocaleString()}
@@ -75,6 +94,7 @@ function HomeCardPost() {
                     isOpen={isModalOpen}
                     onClose={closeModal}
                     postDetails={selectedPost}
+                    accountName={selectedPost.publisherName}
                 />
             )}
         </div>

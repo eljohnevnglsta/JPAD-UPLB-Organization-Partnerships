@@ -1,4 +1,4 @@
-import { registerAccount, loginAccount, logoutAccount, getAccount, updateAccount } from "./controllers/accounts.js";
+import { registerAccount, loginAccount, logoutAccount, getAccount, updateAccount, getAllAccounts } from "./controllers/accounts.js";
 import { createEvent, getEventsByPublisher, getAllEvents, getEventById, updateEvent, deleteEvent } from "./controllers/event.js";
 import { createAnnouncement, getAnnouncementById, getAllAnnouncements, getAnnouncementsByOrg, updateAnnouncement, deleteAnnouncement } from "./controllers/announcement.js";
 import { createRequest, getRequestsByInvitee, getRequestsByPublisher,  getRequestById,  getAllRequests, updateRequest } from "./controllers/request.js";
@@ -14,6 +14,7 @@ const router = (app) => {
     // TODO: Add middleware for authentication
     app.post('/account/update', updateAccount);
     app.post('/account/get', getAccount);
+    app.get('/account/get/all', getAllAccounts);
     
     app.post('/event/create', createEvent);
     app.get('/event/get/all', getAllEvents);
