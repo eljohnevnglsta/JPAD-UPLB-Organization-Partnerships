@@ -6,7 +6,7 @@ function HomeMainPanel(){
     return(
         <div className="main-panel">
             <Header />
-            {/* <CardPost /> */}
+            <CardPost />
         </div>
     )
 }
