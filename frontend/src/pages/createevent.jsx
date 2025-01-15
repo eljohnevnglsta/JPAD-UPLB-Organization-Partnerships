@@ -1,6 +1,12 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 
 function CreateEvent() {
+
+    // Get account details from local storage
+    const userDetails = JSON.parse(localStorage.getItem('account'));
+    const userEmail = userDetails.email;
+
     // State for each form field
     const [formData, setFormData] = useState({
         title: '',
@@ -32,17 +38,23 @@ function CreateEvent() {
         }
 
         // You can send formData to an API or log it for now
-        console.log("Event created:", formData);
-
-        // Reset form after submission (optional)
-        setFormData({
-            title: '',
-            description: '',
-            startDate: '',
-            endDate: '',
-            details: '',
-            imageCover: '',
-            eventType: '',
+        axios.post('http://localhost:3001/event/create', {
+            publisher: userEmail, // TODO: Replace with actual publisher
+            title: formData.title,
+            description: formData.description,
+            startDate: formData.startDate,
+            endDate: formData.endDate,
+            otherDetails: formData.details,
+            cover: formData.imageCover,
+            eventType: formData.eventType,
+        }).then((response) => {
+            if (response.data.success !== true) {
+                throw new Error(response.data.message);
+            }
+            alert("Event created successfully!");
+        }).catch((error) => {
+            console.log(error.message);
+            alert("An error occurred. Please try again.");
         });
     };
 
@@ -139,9 +151,15 @@ function CreateEvent() {
                             className="w-full p-3 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
                         >
                             <option value="" disabled>Select event type</option>
-                            <option value="event1">Fundraising</option>
-                            <option value="event2">Education</option>
-                            <option value="event3">Contest</option>
+                            <option value="Fund-raising">Fund-raising</option>
+                            <option value="Flagship">Flagship</option>
+                            <option value="Community">Community</option>
+                            <option value="Contest">Contest</option>
+                            <option value="Education">Education</option>
+                            <option value="Health">Health</option>
+                            <option value="Environment">Environment</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Others">Others</option>
                         </select>
                     </div>
 
