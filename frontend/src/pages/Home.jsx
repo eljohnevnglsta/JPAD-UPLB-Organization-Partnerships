@@ -4,7 +4,6 @@ import MainPanel from "../components/HomeMainPanel";
 import SidePanel from "../components/HomeSidePanel";
 
 function Home(){
-
     return (
         <>
           <div className="nav-bar">

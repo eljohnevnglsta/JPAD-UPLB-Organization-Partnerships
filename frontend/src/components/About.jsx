@@ -5,7 +5,7 @@ function About() {
 
     return(
         <div className="about-org">
-            <h1 className="org-name">Young Software Engineers' Society</h1>
+            <h1 className="org-name1">Young Software Engineers' Society</h1>
             <h2 className="org-bio">Bridging the gap between the academe and the industry.</h2>
             <ul className="org-links-container">
                 <li className="org-links">
