@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ResponseModal from './ResponseModal';
+import axios from 'axios';
 
 const userEmail = "exec@yses.org";
 
@@ -24,20 +25,27 @@ export default function RequestContent({ partnership }) {
     } = partnership;
 
     // Handle form submission
-    const handleRespond = (action) => {
-        // Example logic for handling the response
-        console.log({
-            requestId,
-            action,
-            responseMessage,
+    const handleRespond = (status) => {    
+        axios.post('http://localhost:3001/request/update', {
+            requestId: requestId,
+            status: status,
+            response: responseMessage,
+        }).then((res) => {
+            alert('Response submitted successfully!');
+        }).catch((error) => {
+            alert('An error occurred. Please try again later.');
         });
-
+    
         // Close the modal after submission
         setIsModalOpen(false);
-
+    
         // Reset response message
         setResponseMessage('');
+
+        // Refresh the page
+        window.location.reload();
     };
+    
 
     return (
         <div className="p-10 w-full max-w-3xl bg-white shadow-lg rounded-lg">

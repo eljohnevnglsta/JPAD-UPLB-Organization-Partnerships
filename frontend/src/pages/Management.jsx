@@ -17,8 +17,8 @@ export default function Management() {
     useEffect(() => {
         axios.get('http://localhost:3001/request/get/all')
             .then((response) => {
-                const fetchedIncoming = response.data.filter((partnership) => partnership.invitee === userEmail);
-                const fetchedOutgoing = response.data.filter((partnership) => partnership.publisher === userEmail);
+                const fetchedIncoming = response.data.filter((partnership) => partnership.invitee === userEmail && partnership.status === "pending");
+                const fetchedOutgoing = response.data.filter((partnership) => partnership.publisher === userEmail && partnership.status === "pending");
                 const fetchedApproved = response.data.filter((partnership) => partnership.status === "approved" && (partnership.publisher === userEmail || partnership.invitee === userEmail));
                 const fetchedRejected = response.data.filter((partnership) => partnership.status === "rejected" && (partnership.publisher === userEmail || partnership.invitee === userEmail));
 
