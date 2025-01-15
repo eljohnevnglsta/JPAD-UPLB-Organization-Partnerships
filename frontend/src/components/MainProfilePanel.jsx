@@ -4,8 +4,7 @@ function MainPanel() {
 
     return(
         <div>
-            {/* TODO: Refactor CSS of Card Post to be modularized */}
-            {/* <CardPost /> */}
+            <CardPost />
         </div>
     )
 }

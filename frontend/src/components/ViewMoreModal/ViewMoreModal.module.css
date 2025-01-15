@@ -1,0 +1,127 @@
+/* Modal overlay background */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content */
+.modalContent {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    width: 100%; 
+    max-width: 1200px; 
+    height: fit-content;  
+    border-radius: 10px;
+}
+
+/* Close Button */
+.closeModal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.closeModal:hover {
+    color: #ff0000; 
+}
+
+/* Title */
+.modalTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0c3e73;
+    margin-bottom: 0px;
+}
+
+/* Modal Content Text */
+.modalText {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Modal Content Text */
+.modalTextContent {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Post Image */
+.modalImage img {
+    width: 100%;
+    height: auto; 
+    object-fit: contain; 
+    margin-top: 20px;
+}
+
+/* Modal Header */
+.modalHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Profile Picture in Modal */
+.profilePictureModal {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+/* Modal Body (Flexbox Layout for 2 Columns) */
+.modalBody {
+    display: flex;
+    gap: 20px; 
+    align-items: flex-start; 
+    margin-top: 20px;
+    height: 100%; 
+}
+
+/* Left Column: Post Image */
+.modalImage {
+    width: 45%; 
+    flex-shrink: 0; 
+    max-width: 450px; 
+    height: auto;
+    object-fit: contain;
+}
+
+/* Right Column: Post Details */
+.modalDetails {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%; 
+}
+
+/* Text Content */
+.modalTextContent {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* Specific Class for Post with Image */
+.modalContentWithImage {
+    height: 600px; 
+    max-height: none; 
+}

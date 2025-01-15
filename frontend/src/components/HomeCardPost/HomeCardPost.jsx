@@ -1,12 +1,12 @@
 
 import { useState } from 'react';
-// import styles from './HomeCardPost.module.css'
+import styles from './HomeCardPost.module.css'
 import ProfilePicture from '../../assets/YSES-logo.png'; 
 import orgLogo from '../../assets/sample-org-logo.png'; 
 import clockIcon from '../../assets/clock-solid.svg'; 
 import sampleImage from '../../assets/sample-post-image.jpg';
 import partnershipIcon from '../../assets/partnership.svg';
-import ViewMoreModal from '../ViewMoreModal'; 
+import ViewMoreModal from '../ViewMoreModal/ViewMoreModal'; 
 
 function HomeCardPost() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,52 +59,52 @@ function HomeCardPost() {
     };
 
     return (
-        <div className="post-cards">
+        <div className={styles.postCards}>
             <h2>Recent Posts</h2>
             {posts.map((post) => (
-                <div className="post-card" key={post.id}>
-                    <div className="post-header">
-                        <img className="profile-picture" src={ProfilePicture} alt="Profile picture" />
-                        <div className="post-meta">
+                <div className={styles.postCard} key={post.id}>
+                    <div className={styles.postHeader}>
+                        <img className={styles.profilePicture} src={ProfilePicture} alt="Profile picture" />
+                        <div className={styles.postMeta}>
                             <h2>{post.title}</h2>
-                            <div className="post-date">
-                                <img className="clock-icon" src={clockIcon} alt="Clock Icon" />
+                            <div className={styles.postDate}>
+                                <img className={styles.clockIcon} src={clockIcon} alt="Clock Icon" />
                                 {post.date}
                             </div>
                         </div>
                     </div>
-
+    
                     {/* Render icon after the title and before the subtitle */}
                     {post.isIcon && (
-                        <div className="post-icon-container">
-                            <img className="post-icon" src={post.image} alt="Icon visual" />
+                        <div className={styles.postIconContainer}>
+                            <img className={styles.postIcon} src={post.image} alt="Icon visual" />
                             {post.orgLogo && (
-                                <img className="org-logo" src={post.orgLogo} alt="Organization logo" />
+                                <img className={styles.orgLogo} src={post.orgLogo} alt="Organization logo" />
                             )}
                         </div>
                     )}
-
-                    <h3 className="post-title">{post.subtitle}</h3>
-
+    
+                    <h3 className={styles.postTitle}>{post.subtitle}</h3>
+    
                     {/* Render content preview only if content exists */}
-                    {post.content && <p className="post-content">{post.content.substring(0, 500)}...</p>}
-
+                    {post.content && <p className={styles.postContent}>{post.content.substring(0, 500)}...</p>}
+    
                     {/* Show "View More" button only if there is content */}
                     {post.content && (
-                        <button className="btn-view" onClick={() => openModal(post)}>
+                        <button className={styles.btnView} onClick={() => openModal(post)}>
                             View More
                         </button>
                     )}
-
+    
                     {/* Display image after "View More" button if not an icon */}
                     {!post.isIcon && post.image && (
-                        <div className="post-image">
+                        <div className={styles.postImage}>
                             <img src={post.image} alt="Post visual" />
                         </div>
                     )}
                 </div>
             ))}
-
+    
             {/* View More Modal */}
             {selectedPost && (
                 <ViewMoreModal
@@ -115,6 +115,7 @@ function HomeCardPost() {
             )}
         </div>
     );
+    
 }
 
 export default HomeCardPost;

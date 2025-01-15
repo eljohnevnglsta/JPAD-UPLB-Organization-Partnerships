@@ -1,13 +1,12 @@
-
 /* Post Cards Section */
-.post-cards {
+.postCards {
     display: flex;
     flex-direction: column; 
     gap: 20px; 
     margin-top: 20px;
 }
 
-.post-cards h2 {
+.postCards h2 {
     font-size: 25px;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -15,7 +14,7 @@
 }
 
 /* Individual Post Card Styling */
-.post-card {
+.postCard {
     background-color: #d9d9d9;
     padding: 20px;
     border-radius: 15px;
@@ -23,20 +22,20 @@
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.post-card:hover {
+.postCard:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Post Header */
-.post-header {
+.postHeader {
     display: flex;
     align-items: center; 
     gap: 15px; 
 }
 
 /* Profile Picture */
-.profile-picture {
+.profilePicture {
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -44,13 +43,13 @@
 }
 
 /* Post Metadata */
-.post-meta h2 {
+.postMeta h2 {
     font-size: 15px;
     color: #333;
     margin: 0;
 }
 
-.post-date {
+.postDate {
     font-size: 15px;
     color: #777;
     display: flex;
@@ -59,20 +58,20 @@
 }
 
 /* Profile Picture */
-.clock-icon {
+.clockIcon {
     width: 15px;
     height: 15px;
     border-radius: 50%;
     object-fit: cover; 
 }
 
-.post-date i {
+.postDate i {
     font-size: 15px;
     color: #777;
 }
 
 /* Post Title */
-.post-title {
+.postTitle {
     font-size: 22px;
     font-weight: bold;
     color: #333;
@@ -80,12 +79,12 @@
 }
 
 /* Post Content */
-.post-content {
+.postContent {
     font-size: 15px;
     color: #555;
 }
 
-.post-title b {
+.postTitle b {
     font-size: 24px;
     color: #0c3e73;
     text-align: center;
@@ -93,14 +92,14 @@
 }
 
 /* Styles for the post image */
-.post-image img {
+.postImage img {
     width: 100%; 
     height: 350px; 
     object-fit: cover; 
     margin-top: 16px; 
 }
 
-.post-icon-container {
+.postIconContainer {
     display: flex;
     align-items: center; 
     justify-content: center; 
@@ -109,7 +108,7 @@
     padding: 0; 
 }
 
-.post-icon {
+.postIcon {
     width: 200px;
     height: 200px;
     object-fit: contain;
@@ -118,7 +117,7 @@
     padding: 0; 
 }
 
-.org-logo {
+.orgLogo {
     width: 150px;
     height: 150px;
     object-fit: contain;
@@ -128,7 +127,7 @@
 }
 
 /* View More Button */
-.btn-view {
+.btnView {
     display: inline-block;
     padding: 8px 16px;
     width: auto;
@@ -141,13 +140,13 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.btn-view:hover {
+.btnView:hover {
     background-color: #282829;
     transform: scale(1.05);
 }
 
 /* Modal overlay background */
-.modal-overlay {
+.modalOverlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -160,7 +159,7 @@
 }
 
 /* Modal Content */
-.modal-content {
+.modalContent {
     position: relative;
     background-color: white;
     padding: 20px;
@@ -171,7 +170,7 @@
 }
 
 /* Close Button */
-.close-modal {
+.closeModal {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -183,12 +182,12 @@
     transition: color 0.3s ease;
 }
 
-.close-modal:hover {
+.closeModal:hover {
     color: #ff0000; 
 }
 
 /* Title */
-.modal-title {
+.modalTitle {
     font-size: 20px;
     font-weight: bold;
     color: #0c3e73;
@@ -196,7 +195,7 @@
 }
 
 /* Modal Content Text */
-.modal-text {
+.modalText {
     font-size: 20px;
     color: #333;
     margin-bottom: 20px;
@@ -204,14 +203,14 @@
 }
 
 /* Modal Content Text */
-.modal-text-content {
+.modalTextContent {
     font-size: 18px;
     color: #333;
     margin-bottom: 20px;
 }
 
 /* Post Image */
-.modal-image img {
+.modalImage img {
     width: 100%;
     height: auto; 
     object-fit: contain; 
@@ -219,14 +218,14 @@
 }
 
 /* Modal Header */
-.modal-header {
+.modalHeader {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
 
 /* Profile Picture in Modal */
-.profile-picture-modal {
+.profilePictureModal {
     width: 50px;
     height: 50px;
     object-fit: contain;
@@ -234,7 +233,7 @@
 }
 
 /* Modal Body (Flexbox Layout for 2 Columns) */
-.modal-body {
+.modalBody {
     display: flex;
     gap: 20px; 
     align-items: flex-start; 
@@ -243,7 +242,7 @@
 }
 
 /* Left Column: Post Image */
-.modal-image {
+.modalImage {
     width: 45%; 
     flex-shrink: 0; 
     max-width: 450px; 
@@ -252,7 +251,7 @@
 }
 
 /* Right Column: Post Details */
-.modal-details {
+.modalDetails {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -261,7 +260,7 @@
 }
 
 /* Text Content */
-.modal-text-content {
+.modalTextContent {
     font-size: 16px;
     color: #555;
     line-height: 1.6;
@@ -269,13 +268,13 @@
 }
 
 /* Specific Class for Post with Image */
-.modal-content-with-image {
+.modalContentWithImage {
     height: 600px; 
     max-height: none; 
 }
 
 @media (max-width: 768px) {
-    .post-cards {
+    .postCards {
         gap: 10px;
     }
 }
