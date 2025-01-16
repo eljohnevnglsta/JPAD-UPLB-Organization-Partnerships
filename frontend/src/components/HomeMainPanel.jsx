@@ -4,9 +4,9 @@ import CardPost from "./HomeCardPost/HomeCardPost";
 function HomeMainPanel(){
 
     return(
-        <div className="main-panel">
+        <div className="main-panel-profile">
             <Header />
-            {/* <CardPost /> */}
+            <CardPost />
         </div>
     )
 }

@@ -1,9 +1,11 @@
+
 /* Post Cards Section */
 .postCards {
     display: flex;
     flex-direction: column; 
     gap: 20px; 
     margin-top: 20px;
+    box-sizing: border-box;
 }
 
 .postCards h2 {
@@ -20,6 +22,7 @@
     border-radius: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
 }
 
 .postCard:hover {
@@ -124,6 +127,18 @@
     display: block;
     margin: 0;
     padding: 0; 
+}
+
+@media (max-width: 450px) {    
+    .postIcon {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .orgLogo {
+        width: 75px;
+        height: 75px;
+    }
 }
 
 /* View More Button */
@@ -275,6 +290,6 @@
 
 @media (max-width: 768px) {
     .postCards {
-        gap: 10px;
+        gap: 30px;
     }
 }
