@@ -1,0 +1,167 @@
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+}
+
+header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 20px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+}
+
+nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #333;
+}
+
+nav a img {
+  height: 16px;
+  vertical-align: middle;
+}
+
+/* Stats Section */
+.stats-container {
+  display: flex;
+  gap: 10px;
+  margin: 20px;
+}
+
+.stat-box {
+  flex: 1;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.stat-box h1 {
+  margin: 0;
+  font-size: 48px;
+}
+
+.stat-box p {
+  margin: 10px 0 0;
+}
+
+.black {
+  background-color: #333333;
+}
+
+.green {
+  background-color: #28a745;
+}
+
+.blue {
+  background-color: #007bff;
+}
+
+.red {
+  background-color: #dc3545;
+}
+
+
+/* Calendar Section */
+.calendar-section {
+  margin: 20px;
+  color: black;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border-color: black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.calendar-navigation button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.calendar-navigation button:hover {
+  background-color: #0056b3;
+}
+
+.calendar-navigation p {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.day {
+  font-weight: bold;
+  text-align: center;
+  padding: 5px 0;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  color: black;
+}
+
+.date {
+  position: relative;
+  height: 80px;
+  text-align: left;
+  padding: 5px;
+  border: 1px solid #eee;
+  color: black;
+}
+
+.event {
+  display: block;
+  font-size: 12px;
+  margin: 3px 0;
+  padding: 2px 5px;
+  border-radius: 3px;
+  color: white;
+}
+
+.event.blue {
+  background-color: blue;
+}
+
+.event.green {
+  background-color: green;
+}
+
+.event.orange {
+  background-color: orange;
+}
+
+.event.red {
+  background-color: red;
+}
+
+.event.gray {
+  background-color: gray;
+}
