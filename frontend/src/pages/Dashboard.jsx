@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Axios for API requests
-import "./Dashboard.css";
+import "../stylesheets/Dashboard.css";
 
 const Dashboard = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
