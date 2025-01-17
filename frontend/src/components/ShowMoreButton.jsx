@@ -1,13 +1,20 @@
+import ShowMoreIcon from '../assets/list-solid.svg';
+import PreviousIcon from '../assets/arrow-left-solid.svg';
 
-import ShowMoreIcon from '../assets/list-solid.svg'; 
-
-function ShowMoreButton() {
+function ShowMoreButton({ onPreviousClick, onShowMoreClick, showPrevious }) {
     return (
-        <button className="show-more-btn">
-            <img className="show-more-icon" src={ShowMoreIcon} alt="Show More Icon" />
-            Show More
-            {/* TO DO: add link to the destination page when clicked */}
-        </button>
+        <div className="show-more-buttons">
+            {showPrevious && (
+                <button className="previous-btn" onClick={onPreviousClick}>
+                    <img className="previous-icon" src={PreviousIcon} alt="Previous Icon" />
+                    Previous
+                </button>
+            )}
+            <button className="show-more-btn" onClick={onShowMoreClick}>
+                <img className="show-more-icon" src={ShowMoreIcon} alt="Show More Icon" />
+                Show More
+            </button>
+        </div>
     );
 }
 

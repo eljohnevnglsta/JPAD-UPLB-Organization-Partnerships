@@ -70,15 +70,26 @@ export const getAnnouncementById = async (req, res) => {
     }
 }
 
-// Get all announcements
+// Get all announcements (also for pagination)
 export const getAllAnnouncements = async (req, res) => {
+    const { page = 1, limit = 5 } = req.query; // set default page to 1 and limit to 5
     try {
-        const announcements = await Announcement.find();
-        res.status(200).send(announcements);
+        const announcements = await Announcement.find()
+            .skip((page - 1) * limit)  // limit and skip number of pages
+            .limit(Number(limit)); 
+
+        const totalCount = await Announcement.countDocuments(); // get total number of announcements
+
+        res.status(200).json({
+            announcements,
+            totalPages: Math.ceil(totalCount / limit), 
+            currentPage: Number(page),
+        });
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
-}
+};
+
 
 export const getAnnouncementsByOrg = async (req, res) => {
     const { publisher } = req.body;
