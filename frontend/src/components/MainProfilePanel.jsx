@@ -3,7 +3,7 @@ import CardPost from "./HomeCardPost/HomeCardPost"
 function MainPanel() {
 
     return(
-        <div>
+        <div className="main-panel-profile">
             <CardPost />
         </div>
     )
