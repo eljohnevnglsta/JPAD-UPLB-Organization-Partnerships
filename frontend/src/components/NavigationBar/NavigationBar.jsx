@@ -7,7 +7,7 @@ function NavigationBar() {
   return (
     <header className={styles.navHeader}>
         <div className={styles.logo}>
-            <h1>sitename</h1>
+            <h1>kasangga</h1>
         </div>
 
         {/* NOTE: will change div to link once merged*/}
