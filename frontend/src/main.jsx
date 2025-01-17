@@ -66,7 +66,6 @@ const router = createBrowserRouter([
         path: '/search',
         element: (
           <>
-            <NavigationBar />
             <Search />
           </>
         ),

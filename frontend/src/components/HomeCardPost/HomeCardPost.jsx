@@ -15,7 +15,8 @@ function HomeCardPost() {
     useEffect(() => {
         axios.get('http://localhost:3001/announcement/get/all')
             .then((response) => {
-                var postsWithPublisherData = response.data.map(post => ({
+                // console.log(response.data.announcements);
+                var postsWithPublisherData = response.data.announcements.map(post => ({
                     ...post,
                     publisherName: '',
                     publisherProfilePicture: ProfilePicture, // Use default profile picture initially
