@@ -3,22 +3,21 @@ import ProfilePicture from '../../assets/YSES-logo.png';
 import SearchIcon from '../../assets/magnifying-glass-solid.svg'; 
 
 function NavigationBar() {
-
+  const account = JSON.parse(localStorage.getItem('account'));
   return (
     <header className={styles.navHeader}>
         <div className={styles.logo}>
-            <h1>sitename</h1>
-        </div>
+            <h1>kasangga</h1>
+        </div>  
 
-        {/* NOTE: will change div to link once merged*/}
         <nav className={styles.navLinks}>
-          <div className={styles.navItemDashboard}><h2>dashboard</h2></div>
-          <div className={styles.navItemPartnerships}><h2>partnerships</h2></div>
-          <div className={styles.navItemSearch}><img className={styles.searchIcon} src={SearchIcon} alt="Search Icon" /></div>
-          <div className={styles.navItemProfile}><img className={styles.profilePicture} src={ProfilePicture} alt="Profile Pic" /></div>
+          <a className={styles.navItemDashboard} href="/management"><h2>dashboard</h2></a>
+          <a className={styles.navItemPartnerships} href="/management"><h2>partnerships</h2></a>
+          <div className={styles.navItemSearch} onClick={() => window.location.href = "/search"}><img className={styles.searchIcon} src={SearchIcon} alt="Search Icon" /></div>
+          <div className={styles.navItemProfile} onClick={() => window.location.href = `/profile/${account.email}`}><img className={styles.profilePicture} src={ProfilePicture} alt="Profile Pic" /></div>
         </nav>
     </header>
   );
 
 }
-export default NavigationBar;
+export default NavigationBar; 

@@ -17,7 +17,7 @@ createRoot(document.getElementById('root')).render(
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:accountemail" element={<Profile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/management" element={
@@ -26,9 +26,19 @@ createRoot(document.getElementById('root')).render(
             <Management />
           </div>
           } />
-        <Route path="/createevent" element={<CreateEvent />} />
-        <Route path="/createpost" element={<CreatePost />} />
-        <Route path="/search" element={<Search />} />
+        <Route path="/createevent" element={
+          <div>
+            <NavigationBar />
+            <CreateEvent />
+          </div>
+        } />
+        <Route path="/createpost" element={
+          <div>
+            <NavigationBar />
+            <CreatePost />
+          </div>
+        } />
+        <Route path="/search/" element={<Search />} />
       </Routes>
     </Router>
   </StrictMode>

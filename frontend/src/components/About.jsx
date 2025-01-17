@@ -5,17 +5,18 @@ import mailIcon from '../assets/mail-icon.png';
 import linkIcon from '../assets/link-icon.png';
 import phoneIcon from '../assets/phone-icon.png'
 import profilePicture from '../assets/default-profile-picture.jpg'; 
+import { useParams } from 'react-router-dom';
 
 function About() {
+    let { accountemail } = useParams();
     // to store the data 
     const [orgData, setOrgData] = useState([]);
 
     // request for the data abt the org
     useEffect(() => {
-        axios.post('http://localhost:3001/account/get', {email: "exec@yses.org"})
+        axios.post('http://localhost:3001/account/get', {email: accountemail})
         .then((response) => {
             setOrgData(response.data);  
-            console.log(response.data)
         })
         .catch((error) => {
             console.log(error.message);
@@ -37,7 +38,7 @@ function About() {
                 <div className="org-links-container">
                     {/* email */}
                     {orgData.email && (
-                        <div className="org-email">
+                    <div className="org-email" href={`mailto:${orgData.email}`}>
                         <img src={mailIcon} className="links-icon" alt="Mail" />
                         <span> {orgData.email} </span>
                     </div>
