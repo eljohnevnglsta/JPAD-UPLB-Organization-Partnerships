@@ -1,28 +1,28 @@
-import express from 'express';
-import cors from 'cors';
-import router from './router.js';
-import cookieParser from 'cookie-parser';
-import dotenv from 'dotenv';
-dotenv.config({ path: '../.env' });
+const express = require('express')
+const mongoose = require('mongoose')
+const cors = require('cors')
+const UserModel = require('./models/Users')
+const ReportModel = require('./models/Reports')
 
-const app = express();
-app.use(cookieParser());
+const app = express()
+app.use(cors())
+app.use(express.json())
 
-// Define CORS options
-const corsOptions = {
-  origin: process.env.ALLOWEDORIGIN, // Allow only requests from this origin
-  credentials: true
-};
+mongoose.connect("mongodb+srv://jvvillarosa:WT5xr53ZEjZRoRu9@jpadprojectdatabase.vc75f.mongodb.net/test")
 
-// Apply CORS middleware with options
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.get('/getUsers', (req, res) => {
+    UserModel.find()
+      .then(users => res.json(users))
+      .catch(err => res.json(err));
+  });
 
-const PORT = process.env.PORT; 
+  app.get('/getReports', (req, res) => {
+    ReportModel.find()
+      .then(reports => res.json(reports))
+      .catch(err => res.json(err));
+  });
 
-app.listen(PORT, () => {
-  console.log(`Server Started at Port ${PORT}`);
-});
-
-router(app);
+  
+app.listen(3001, () => {
+    console.log("Server is running")
+})
