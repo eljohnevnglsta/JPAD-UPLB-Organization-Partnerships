@@ -5,19 +5,19 @@
     justify-content: space-between; 
     align-items: center;
     padding: 10px 20px;
-    background-color: #ffffff;
-    color: #333;
-    border-bottom: 1px solid #ddd;
+    background-color: #0c3e73;
+    color: white;
     position: sticky;
     top: 0;
     z-index: 1000;
+    height: 70px;
     width: 100%;
     box-sizing: border-box; 
 }
 .navHeader .logo h1 {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
-    color: #0b578d; 
+    color: white; 
     margin: 0;
     margin-right: 100px;
 }
@@ -40,14 +40,14 @@
     font-size: 18px; 
     font-weight: bold;
     margin: 0;
-    color: #333; 
+    color: white; 
     transition: color 0.3s ease;
     cursor: pointer;
 }
 
 .navItemDashboard h2:hover,
 .navItemPartnerships h2:hover {
-    color: #0b578d; 
+    transform: scale(1.1);
 }
 .searchIcon {
     width: 20px;
@@ -65,6 +65,7 @@
     height: 50px;  
     object-fit: contain;
     cursor: pointer;
+    color: white;
     transition: transform 0.2s ease;
     border-radius: 50%;
 }
@@ -78,97 +79,6 @@
     .navItem h1 {
         font-size: 16px;
     }
-    .searchIcon,
-    .profilePicture {
-        width: 25px;
-        height: 25px;
-    }
-}/* Navigation Bar */
-.navHeader {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #ffffff;
-    color: #0c3e73;
-    border-bottom: 1px solid #ddd;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    width: 100vw;
-    box-sizing: border-box; 
-}
-
-.navHeader .logo h1 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #0c3e73;
-    margin: 0;
-    margin-right: 100px;
-}
-
-.navLinks {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-grow: 1; 
-    justify-content: flex-end;  
-    margin-left: 30px;  
-}
-
-.navItem {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-}
-
-.navItem h1 {
-    font-size: 18px;
-    color: #333;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    margin: 0;
-}
-
-.navItem h1:hover {
-    color: #0b578d;
-}
-
-.searchIcon {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.searchIcon:hover,
-.profilePicture:hover {
-    transform: scale(1.1);
-}
-
-.profilePicture {
-    width: 30px; 
-    height: 30px;  
-    object-fit: contain;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    border-radius: 50%;
-}
-
-/* Mobile Styling */
-@media (max-width: 800px) {
-    .navLinks {
-        gap: 10px;
-        flex-direction: column;
-        align-items: flex-end;
-    }
-
-    .navItem h1 {
-        font-size: 16px;
-    }
-
     .searchIcon,
     .profilePicture {
         width: 25px;
