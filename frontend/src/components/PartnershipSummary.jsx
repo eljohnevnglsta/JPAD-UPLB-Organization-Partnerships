@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const userEmail = "exec@yses.org";
-
 export default function PartnershipSummary(props) {
+    const userEmail = JSON.parse(localStorage.getItem('account')).email;
     const [event, setEvent] = useState({});
     const [publisher, setPublisher] = useState({});
     const [invitee, setInvitee] = useState({});

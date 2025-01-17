@@ -3,10 +3,12 @@ import PartnershipSummary from '../components/PartnershipSummary';
 import axios from 'axios';
 import RequestContent from '../components/RequestContent';
 
-const userEmail = "exec@yses.org";
 
 export default function Management() {
     // State to store partnerships and the selected partnership
+    const userAccount = JSON.parse(localStorage.getItem('account'));
+    const userEmail = userAccount.email;
+
     const [partnerships, setPartnerships] = useState([]);
     const [incoming, setIncoming] = useState([]);
     const [outgoing, setOutgoing] = useState([]);
