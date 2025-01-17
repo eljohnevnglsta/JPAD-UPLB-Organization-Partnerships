@@ -23,6 +23,7 @@ function NavigationBar() {
             <h1>kasangga</h1>
         </div>  
         <nav className={styles.navLinks}>
+          {accountData.role === 'admin' ? <a className={styles.navItemDashboard} href="/reports"><h2>reports</h2></a> : null}
           <a className={styles.navItemDashboard} href="/dashboard"><h2>dashboard</h2></a>
           <a className={styles.navItemPartnerships} href="/management"><h2>partnerships</h2></a>
           <div className={styles.navItemSearch} onClick={() => window.location.href = "/search"}><img className={styles.searchIcon} src={SearchIcon} alt="Search Icon" /></div>

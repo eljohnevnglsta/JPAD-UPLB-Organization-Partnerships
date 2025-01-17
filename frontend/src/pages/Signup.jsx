@@ -45,6 +45,10 @@ const Signup = ({ setCurrentPage }) => {
           console.log(response.data);
           // store account details in local storage
           localStorage.setItem('account', JSON.stringify(response.data));
+          if (response.data.role === 'admin') {
+            window.location.href = '/reports';
+            return;
+          }
           window.location.href = '/';
         }). catch((error) => {
           console.log(error.message);
