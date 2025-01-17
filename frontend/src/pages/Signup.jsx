@@ -45,11 +45,10 @@ const Signup = ({ setCurrentPage }) => {
           console.log(response.data);
           // store account details in local storage
           localStorage.setItem('account', JSON.stringify(response.data));
+          window.location.href = '/';
         }). catch((error) => {
           console.log(error.message);
-        });
-
-        // TODO: Redirect to dashboard
+        });      
 
       } else {
         alert(response.data.message);
@@ -71,9 +70,9 @@ const Signup = ({ setCurrentPage }) => {
   return (
     <div>
       <div className="navbar">
-        <div className="logo">sitename</div>
+        <div className="logo">kasangga</div>
         <div className="nav-auth">
-          <button className="nav-button" onClick={() => setCurrentPage('login')}>
+          <button className="nav-button" onClick={() => window.location.href = '/login'}>
             Log In
           </button>
         </div>

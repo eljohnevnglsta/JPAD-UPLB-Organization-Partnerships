@@ -27,7 +27,8 @@ const Login = ({ setCurrentPage }) => {
           .then((response) => {
             // store account details in local storage
             localStorage.setItem('account', JSON.stringify(response.data));
-          }). catch((error) => {
+            window.location.href = '/';
+          }).catch((error) => {
             console.log(error.message);
           });
 
@@ -48,9 +49,9 @@ const Login = ({ setCurrentPage }) => {
   return (
     <div>
       <div className="navbar">
-        <div className="logo">sitename</div>
+        <div className="logo">kasangga</div>
         <div className="nav-auth">
-          <button className="nav-button" onClick={() => setCurrentPage('signup')}>
+          <button className="nav-button" onClick={() => window.location.href = '/signup'}>
             Sign Up
           </button>
         </div>
@@ -88,7 +89,7 @@ const Login = ({ setCurrentPage }) => {
               <button type="submit" className="auth-button">Log In</button>
 
               {/* Display error message if credentials are invalid */}
-              {errorMessage && <p className="error-message">{errorMessage} HIII</p>}
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
             </form>
           </div>
         </div>

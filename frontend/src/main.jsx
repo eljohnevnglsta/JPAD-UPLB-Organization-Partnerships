@@ -1,52 +1,97 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+// Importing pages and components
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Management from './pages/Management';
-import CreateEvent from './pages/createevent';
-import CreatePost from './pages/createpost';
+import CreateEvent from './pages/CreateEvent';
+import CreatePost from './pages/CreatePost';
 import Search from './pages/Search';
 import Dashboard from './pages/Dashboard';
-import './index.css';
 import NavigationBar from './components/NavigationBar/NavigationBar';
+import Authentication from './auth/Authentication';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile/:accountemail" element={<Profile />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/management" element={
-          <div>
+const router = createBrowserRouter([
+  {
+    element: <Authentication />, // Wrapper for protected routes
+    children: [
+      {
+        path: '/',
+        element: <Home />,
+      },
+      {
+        path: '/profile/:accountemail',
+        element: (
+          <>
+            <Profile />
+          </>
+        ),
+      },
+      {
+        path: '/management',
+        element: (
+          <>
             <NavigationBar />
             <Management />
-          </div>
-          } />
-        <Route path="/createevent" element={
-          <div>
+          </>
+        ),
+      },
+      {
+        path: '/createevent',
+        element: (
+          <>
             <NavigationBar />
             <CreateEvent />
-          </div>
-        } />
-        <Route path="/createpost" element={
-          <div>
+          </>
+        ),
+      },
+      {
+        path: '/createpost',
+        element: (
+          <>
             <NavigationBar />
             <CreatePost />
-          </div>
-        } />
-        <Route path="/search/" element={<Search />} />
-        <Route path="/dashboard" element={
-          <div>
+          </>
+        ),
+      },
+      {
+        path: '/search',
+        element: (
+          <>
+            <NavigationBar />
+            <Search />
+          </>
+        ),
+      },
+      {
+        path: '/dashboard',
+        element: (
+          <>
             <NavigationBar />
             <Dashboard />
-          </div>
-        } />
-      </Routes>
-    </Router>
-  </StrictMode>
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/signup',
+    element: <Signup />,
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
 );
