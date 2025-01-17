@@ -133,6 +133,7 @@ body {
     display: flex; 
     align-items: center; 
     gap: 70px;
+    margin-top: 50px;
     margin-bottom: 10px;
 }
 
@@ -459,7 +460,13 @@ body {
     max-height: none; 
 }
 
-/* Show More button */
+/* Show More + Previous button */
+.show-more-buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
 .show-more-btn {
     display: inline-block;
     padding: 8px 16px;
@@ -476,15 +483,34 @@ body {
     align-items: center;  
 }
 
-.show-more-btn:hover {
+.show-more-btn:hover,
+.previous-btn:hover  {
     background-color: #282829;
     transform: scale(1.05);
 }
 
-.show-more-btn .show-more-icon {
+.show-more-btn .show-more-icon,
+.previous-btn .previous-icon {
     width: 20px;   
     height: 20px;  
     margin-right: 10px; 
+}
+
+/* Previous button */
+.previous-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    width: auto;
+    margin-top: 20px;
+    background-color: #434344;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;  
 }
 
 /* Sidebar */
