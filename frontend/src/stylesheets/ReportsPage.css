@@ -1,0 +1,86 @@
+/* ReportsPage.css */
+
+/* Main container */
+.reports-page-container {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding: 0 20px;
+  }
+  
+  /* Review Section */
+  .review-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .cases-title {
+    background-color: red;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    padding: 10px 40px;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .cases-title:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Table Container */
+  .table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  thead {
+    background-color: #f4f4f4;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 16px;
+  }
+  
+  th {
+    font-weight: bold;
+    color: #333;
+    text-transform: capitalize;
+  }
+  
+  tbody tr:hover {
+    background-color: #f9f9f9;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  /* Review Button */
+  .review-button {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .review-button:hover {
+    background-color: darkred;
+    transform: scale(1.1);
+  }
+  

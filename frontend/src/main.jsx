@@ -13,8 +13,11 @@ import CreateEvent from './pages/CreateEvent';
 import CreatePost from './pages/CreatePost';
 import Search from './pages/Search';
 import Dashboard from './pages/Dashboard';
+import ReportsPage from './pages/ReportsPage';
+
 import NavigationBar from './components/NavigationBar/NavigationBar';
 import Authentication from './auth/Authentication';
+import Admin from './auth/Admin';
 
 const router = createBrowserRouter([
   {
@@ -77,6 +80,12 @@ const router = createBrowserRouter([
           </>
         ),
       },
+      {
+        element: <Admin />, // Wrapper for admin routes
+        children: [
+          {path: '/reports', element: <ReportsPage />}
+        ]
+      }
     ],
   },
   {
