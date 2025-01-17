@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import ResponseModal from './ResponseModal';
 import axios from 'axios';
-
-const userEmail = "exec@yses.org";
+import { useEffect } from 'react';
 
 export default function RequestContent({ partnership }) {
+    const userAccount = JSON.parse(localStorage.getItem('account'));
+    const userEmail = userAccount.email;
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
-
-    if (!partnership) {
-        return <p>No partnership selected.</p>;
-    }
+    const [event, setEvent] = useState({});
 
     const {
         requestId,
@@ -24,6 +23,21 @@ export default function RequestContent({ partnership }) {
         response,
     } = partnership;
 
+    useEffect(() => {
+        axios.post('http://localhost:3001/event/get/id', {
+            eventId: eventId
+        }).then((res) => {
+            setEvent(res.data);
+            console.log(res.data);
+        }).catch((error) => {
+            alert('An error occurred. Please try again later.');
+        });
+    }, []);
+
+    if (!partnership) {
+        return <p>No partnership selected.</p>;
+    }
+
     // Handle form submission
     const handleRespond = (status) => {    
         axios.post('http://localhost:3001/request/update', {
@@ -35,6 +49,19 @@ export default function RequestContent({ partnership }) {
         }).catch((error) => {
             alert('An error occurred. Please try again later.');
         });
+        
+        
+        axios.post('http://localhost:3001/event/update', {
+            parterIds: [...event.partnerIds, invitee]
+        }).then((res) => {
+            if (res.data.success) {
+                alert('Response submitted successfully!');
+            } else {
+                alert('An error occurred. Please try again later.');
+            }
+        }).catch((error) => {
+            alert('An error occurred. Please try again later.');
+        }).
     
         // Close the modal after submission
         setIsModalOpen(false);
@@ -60,7 +87,7 @@ export default function RequestContent({ partnership }) {
                 <h2 className="text-xl font-semibold">Partnership Details</h2>
                 <p><strong>Status:</strong> <span className={`text-${getStatusColor(status)}`}>{status}</span></p>
                 <p><strong>Type:</strong> {partnershipType}</p>
-                <p><strong>Event ID:</strong> {eventId}</p>
+                <p><strong>Event:</strong> {event.title}</p>
             </div>
 
             {/* Participants */}

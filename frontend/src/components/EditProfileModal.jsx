@@ -4,10 +4,11 @@ import axios from 'axios';
 function EditProfileModal(props) {
     // to store the data 
     const [orgData, setOrgData] = useState([]);
+    const userAccount = JSON.parse(localStorage.getItem('account'));
 
     // initially load the data abt the org
     useEffect(() => {
-      axios.post('http://localhost:3001/account/get', { email: 'exec@yses.org' })
+      axios.post('http://localhost:3001/account/get', { email: userAccount.email })
         .then((response) => {
           // console.log(response.data); // testing
           setOrgData(response.data);
@@ -47,7 +48,7 @@ function EditProfileModal(props) {
       try {
         const response = await axios.post('http://localhost:3001/account/update', {
           name: orgData.name,
-          email: 'exec@yses.org',
+          email: orgData.email,
           password: orgData.password,
           bio: orgData.bio,
           // TODO: update profile picture

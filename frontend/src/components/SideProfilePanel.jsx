@@ -1,5 +1,7 @@
+import { useEffect } from "react"
 
 function SidePanel() {
+    // useEffect(() => {
 
     return(
         <div className="sidepanel">

@@ -7,6 +7,7 @@ import MainPanel from "../components/MainProfilePanel";
 import ButtonProfile from "../components/ButtonProfile";
 import EditProfileModal from '../components/EditProfileModal';
 import PartnerModal from '../components/PartnerModal';
+import { useParams } from 'react-router-dom';
 
 function Profile() {
   const [isModalOpen, setIsModalOpen] = useState(false); // for Edit Profile Modal
@@ -18,6 +19,9 @@ function Profile() {
   const openPartnerModal = () => setIsPartnerModalOpen(true); // same as above but for Partner Modal
   const closePartnerModal = () => setIsPartnerModalOpen(false); 
 
+  const userAccount = JSON.parse(localStorage.getItem('account'));
+  const {accountemail} = useParams();
+
   return (
     <>
       <div className="nav-bar">
@@ -28,7 +32,7 @@ function Profile() {
       
       <div className="profile-body">
         <div className="body-side">
-          <ButtonProfile isPrivateView={true} onEditProfileClick={openModal}  onPartnerClick={openPartnerModal}/> {/* pass the functions to the buttons*/}
+          <ButtonProfile isPrivateView={userAccount.email === accountemail} onEditProfileClick={openModal}  onPartnerClick={openPartnerModal}/> {/* pass the functions to the buttons*/}
           <SidePanel />
         </div>
         <MainPanel />
