@@ -134,6 +134,7 @@ function HomeCardPost() {
                     accountName={selectedPost.publisherName}
                     eventName={selectedPost.eventName}
                     email={accountemail}
+                    profilePicture={selectedPost.publisherProfilePicture}
                 />
             )}
         </div>

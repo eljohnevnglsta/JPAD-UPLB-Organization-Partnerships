@@ -30,7 +30,7 @@ function Notifications() {
                 <div className="notification-card">
                     <div className="number-box-1">{fetchedIncoming.length}</div>
                     <div className="description">
-                        <span className="highlight new">new</span> partnerships from other organizations
+                        <span className="highlight new">new</span> requests
                     </div>
                 </div>
                 
@@ -52,7 +52,7 @@ function Notifications() {
             {/* Partnerships Link */}
                 
             <div className="partnerships">
-                <div className="btn-partnerships"> View in Partnerships Tab</div>
+                <div className="btn-partnerships" onClick={() => {window.location.href = '/management'}}> View in Partnerships Tab</div>
             </div>
         </div>
     );

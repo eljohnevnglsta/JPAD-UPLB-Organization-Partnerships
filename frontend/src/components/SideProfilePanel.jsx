@@ -11,8 +11,8 @@ function SidePanel() {
     useEffect(() => {
         axios.get('http://localhost:3001/event/get/all')
             .then((response) => {
-                console.log(response.data)
                 setEvents(response.data.filter((event) => event.publisher === userEmail))
+                console.log(response.data)  
                 setPartnerships(response.data.filter((event) => event.partnerIds.includes(userEmail)))
             })
             .catch((error) => {

@@ -52,6 +52,7 @@ export default function RequestContent({ partnership }) {
         
         
         axios.post('http://localhost:3001/event/update', {
+            eventId: eventId,
             parterIds: [...event.partnerIds, invitee]
         }).then((res) => {
             if (res.data.success) {
