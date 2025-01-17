@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../stylesheets/ReviewReportPage.css';
 import axios from 'axios';
 
 const ReviewReportPage = ({ isOpen, onClose, report }) => {
