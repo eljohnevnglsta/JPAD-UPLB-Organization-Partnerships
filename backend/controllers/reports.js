@@ -54,7 +54,7 @@ export const Report = mongoose.model('Report', {
     },
     dateReported: {
         type: Date,
-        default: ""
+        default: Date.now
     }
 });
 
@@ -69,7 +69,6 @@ export const createReport = async (req, res) => {
             reason,
             description,
             image,
-            DateReported: new Date()
         });
         res.status(200).send({ success: true, message: "Report created successfully" });
     } catch (error) {
