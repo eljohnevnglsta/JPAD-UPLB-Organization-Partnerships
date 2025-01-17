@@ -1,10 +1,10 @@
-import CardPost from "./HomeCardPost/HomeCardPost"
+import CardPost from "./ProfileCardPost/CardPost"
 
 function MainPanel() {
 
     return(
         <div className="main-panel-profile">
-            <CardPost />
+            <CardPost publisher="exec@yses.org" />
         </div>
     )
 }
