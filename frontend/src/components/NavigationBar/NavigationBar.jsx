@@ -12,7 +12,8 @@ function NavigationBar() {
 
         {/* NOTE: will change div to link once merged*/}
         <nav className={styles.navLinks}>
-          <div className={styles.navItemDashboard}><h1>dashboard</h1></div>
+          <div className={styles.navItemDashboard}><h2>dashboard</h2></div>
+          <div className={styles.navItemPartnerships}><h2>partnerships</h2></div>
           <div className={styles.navItemSearch}><img className={styles.searchIcon} src={SearchIcon} alt="Search Icon" /></div>
           <div className={styles.navItemProfile}><img className={styles.profilePicture} src={ProfilePicture} alt="Profile Pic" /></div>
         </nav>
@@ -20,5 +21,4 @@ function NavigationBar() {
   );
 
 }
-
 export default NavigationBar;

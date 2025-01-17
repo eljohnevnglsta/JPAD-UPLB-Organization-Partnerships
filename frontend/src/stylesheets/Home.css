@@ -106,7 +106,7 @@ body {
     display: flex; 
     justify-content: space-between; 
     align-items: flex-start; 
-    height: calc(100vh - 50px); 
+    height: 1650px;
     padding: 10px 20px;
     gap: 10px; 
     width: 100%; 
@@ -118,6 +118,7 @@ body {
     flex: 1;
     padding: 50px;
     overflow-y: auto;
+    position: relative;
 }
 
 .main-panel h1 {
@@ -327,6 +328,162 @@ body {
 .btn-view:hover {
     background-color: #282829;
     transform: scale(1.05);
+}
+
+/* Modal overlay background */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    width: 100%; 
+    max-width: 1200px; 
+    height: fit-content;  
+    border-radius: 10px;
+}
+
+/* Close Button */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #ff0000; 
+}
+
+/* Title */
+.modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0c3e73;
+    margin-bottom: 0px;
+}
+
+/* Modal Content Text */
+.modal-text {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Modal Content Text */
+.modal-text-content {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Post Image */
+.modal-image img {
+    width: 100%;
+    height: auto; 
+    object-fit: contain; 
+    margin-top: 20px;
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Profile Picture in Modal */
+.profile-picture-modal {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+/* Modal Body (Flexbox Layout for 2 Columns) */
+.modal-body {
+    display: flex;
+    gap: 20px; 
+    align-items: flex-start; 
+    margin-top: 20px;
+    height: 100%; 
+}
+
+/* Left Column: Post Image */
+.modal-image {
+    width: 45%; 
+    flex-shrink: 0; 
+    max-width: 450px; 
+    height: auto;
+    object-fit: contain;
+}
+
+/* Right Column: Post Details */
+.modal-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%; 
+}
+
+/* Text Content */
+.modal-text-content {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* Specific Class for Post with Image */
+.modal-content-with-image {
+    height: 600px; 
+    max-height: none; 
+}
+
+/* Show More button */
+.show-more-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    width: auto;
+    margin-top: 20px;
+    background-color: #434344;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;  
+}
+
+.show-more-btn:hover {
+    background-color: #282829;
+    transform: scale(1.05);
+}
+
+.show-more-btn .show-more-icon {
+    width: 20px;   
+    height: 20px;  
+    margin-right: 10px; 
 }
 
 /* Sidebar */
