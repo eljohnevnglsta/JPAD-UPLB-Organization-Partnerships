@@ -61,22 +61,24 @@ function PartnerModal(props) {
             <div className="modal-content">
                 <h2 className="partnership-request-header">Partnership Request</h2>
                 <form className="partnership-form" onSubmit={handleSubmit}>
-                <label className="partnership-form-title">
-                    Event:
-                    <select
-                        name="title"
-                        value={requestData.title || ''} // Fallback to an empty string if undefined
-                        onChange={handleInputChange}
-                        title="Please select an event"
-                        required
-                    >
-                        <option value="" disabled>Select an event</option>
-                        {events.map((event) => (
-                            <option key={event.eventId} value={event.eventId}>{event.title}</option>
-                        ))}
-                    </select>
-                </label>
-
+                    <div className='tailwind-scope'>
+                    <label className="partnership-form-title">
+                            Event:
+                            <select
+                                name="title"
+                                value={requestData.title || ''} // Fallback to an empty string if undefined
+                                onChange={handleInputChange}
+                                title="Please select an event"
+                                required
+                                className='rounded-xl border border-black bg-gray-300 p-2'   
+                            >
+                                <option value="" disabled>Select an event</option>
+                                {events.map((event) => (
+                                    <option key={event.eventId} value={event.eventId}>{event.title}</option>
+                                ))}
+                            </select>
+                        </label>
+                    </div>
                     <label className="partnership-form-body">
                         Body:
                         <textarea

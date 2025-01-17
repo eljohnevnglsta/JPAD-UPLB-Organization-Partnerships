@@ -27,7 +27,7 @@ function SidePanel() {
                 <p className="current-events-header">Current Events</p>
                 <ul className="current-events-container">
                     {events.map((event) => (
-                        <li className="current-events-item">{event.title}</li>
+                        <li className="current-events-item" key={event.eventId}>{event.title}</li>
                     ))}
                 </ul>
             </div>
@@ -35,7 +35,7 @@ function SidePanel() {
                 <p className="current-partnerships-header">Current Partnerships</p>
                 <ul className="current-partnerships-container">
                     {partnerships.map((event) => (
-                        <li className="current-partnerships-item">{`${event.title} by ${event.publisher}`}</li>
+                        <li className="current-partnerships-item" key={event.eventId}>{`${event.title} by ${event.publisher}`}</li>
                     ))}
                 </ul>
             </div>
