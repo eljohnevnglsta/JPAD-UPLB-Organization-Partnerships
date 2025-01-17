@@ -1,15 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../stylesheets/Search.css";
 import SearchIcon from "../assets/magnifying-glass-solid.svg";
+import axios from "axios";
 
 function SearchBar() {
+    const user = JSON.parse(localStorage.getItem("account"));
     const [query, setQuery] = useState("");
-    const suggestions = [
-        "Young Software Engineers' Society",
-        "Young Blood",
-        "Yomite Club",
-        "Yoimiya Haters",
-    ]; 
+    const [suggestions, setSuggestions] = useState([]);
+    const [accounts, setAccounts] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/account/get/all").then((response) => {
+            const accounts = response.data;
+            setAccounts(accounts);
+            const accountNames = accounts.map(account => account.name);
+            // Remove the current user's name from the suggestions
+            const index = accountNames.indexOf(user.name);
+            if (index > -1) accountNames.splice(index, 1);
+            setSuggestions(accountNames);
+        }).catch((error) => {
+            console.log(error.message);
+        });
+    }, []);
 
     const filteredSuggestions = suggestions.filter(suggestion =>
         suggestion.toLowerCase().includes(query.toLowerCase())
@@ -17,8 +29,12 @@ function SearchBar() {
 
     const handleSuggestionClick = (suggestion) => {
         setQuery(suggestion); // Update query with the selected suggestion
+        const selectedAccount = accounts.find(account => account.name === suggestion); // Find the account object
+        if (selectedAccount) {
+            window.location.href = `/profile/${selectedAccount.email}`; // Redirect to the selected profile
+        }
     };
-
+    
     return (
         <div className="search-container">
             <div className="input-wrapper">

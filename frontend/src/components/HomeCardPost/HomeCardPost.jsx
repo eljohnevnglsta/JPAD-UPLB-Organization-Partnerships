@@ -3,21 +3,26 @@ import axios from 'axios';
 import ProfilePicture from '../../assets/default-profile-picture.jpg';
 import clockIcon from '../../assets/clock-solid.svg'; 
 import ViewMoreModal from '../ViewMoreModal'; 
+import { useParams } from 'react-router-dom';
 
 function HomeCardPost() {
     const [posts, setPosts] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPost, setSelectedPost] = useState(null);
+    let { accountemail } = useParams();
 
     // Fetch announcements from the backend
     useEffect(() => {
         axios.get('http://localhost:3001/announcement/get/all')
             .then((response) => {
-                const postsWithPublisherData = response.data.map(post => ({
+                var postsWithPublisherData = response.data.map(post => ({
                     ...post,
                     publisherName: '',
                     publisherProfilePicture: ProfilePicture // Use default profile picture initially
                 }));
+                if (accountemail) {
+                    postsWithPublisherData = postsWithPublisherData.filter(post => post.publisher === accountemail);
+                }
                 postsWithPublisherData.reverse(); // Show most recent posts first
                 setPosts(postsWithPublisherData);
 
