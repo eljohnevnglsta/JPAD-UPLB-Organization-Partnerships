@@ -460,7 +460,7 @@ body {
     max-height: none; 
 }
 
-/* Show More button */
+/* Show More + Previous button */
 .show-more-buttons {
     display: flex;
     justify-content: flex-start;

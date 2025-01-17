@@ -1,4 +1,3 @@
-
 import ShowMoreIcon from '../assets/list-solid.svg';
 import PreviousIcon from '../assets/arrow-left-solid.svg';
 

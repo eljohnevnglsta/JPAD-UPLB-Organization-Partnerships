@@ -23,12 +23,14 @@ function HomeMainPanel() {
             });
     }, [currentPage]);
 
+    // Function to go to the next page (increases the currentPage by 1)
     const goToNextPage = () => {
         if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
         }
     };
 
+    // Function to go to the previous page (decreases the currentPage by 1)
     const goToPreviousPage = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);

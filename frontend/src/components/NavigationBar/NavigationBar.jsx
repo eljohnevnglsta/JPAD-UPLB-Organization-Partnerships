@@ -1,6 +1,6 @@
 import styles from './NavigationBar.module.css'
 import ProfilePicture from '../../assets/YSES-logo.png'; 
-import SearchIcon from '../../assets/magnifying-glass-solid.svg'; 
+import SearchIcon from '../../assets/magnifying-glass-white-solid.svg'; 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
