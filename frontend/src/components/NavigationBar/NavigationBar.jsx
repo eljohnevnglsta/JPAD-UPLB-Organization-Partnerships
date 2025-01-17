@@ -19,7 +19,7 @@ function NavigationBar() {
 
   return (
     <header className={styles.navHeader}>
-        <div className={styles.logo}>
+        <div className={styles.logo} onClick={() => window.location.href = "/"} style={{cursor: 'pointer'}}>
             <h1>kasangga</h1>
         </div>  
 

@@ -185,6 +185,7 @@ body {
 
 /* Post Cards Section */
 .post-cards {
+    width: 1000px;
     display: flex;
     flex-direction: column; 
     gap: 20px; 
@@ -278,7 +279,7 @@ body {
 
 /* Styles for the post image */
 .post-image img {
-    width: 100%; 
+    width: 500px; 
     height: 350px; 
     object-fit: cover; 
     margin-top: 16px; 

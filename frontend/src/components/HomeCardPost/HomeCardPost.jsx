@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProfilePicture from '../../assets/default-profile-picture.jpg';
-import clockIcon from '../../assets/clock-solid.svg'; 
-import ViewMoreModal from '../ViewMoreModal'; 
+import clockIcon from '../../assets/clock-solid.svg';
+import ViewMoreModal from '../ViewMoreModal';
 import { useParams } from 'react-router-dom';
 
 function HomeCardPost() {
@@ -18,7 +18,8 @@ function HomeCardPost() {
                 var postsWithPublisherData = response.data.map(post => ({
                     ...post,
                     publisherName: '',
-                    publisherProfilePicture: ProfilePicture // Use default profile picture initially
+                    publisherProfilePicture: ProfilePicture, // Use default profile picture initially
+                    eventName: '' // Placeholder for the event name
                 }));
                 if (accountemail) {
                     postsWithPublisherData = postsWithPublisherData.filter(post => post.publisher === accountemail);
@@ -26,8 +27,9 @@ function HomeCardPost() {
                 postsWithPublisherData.reverse(); // Show most recent posts first
                 setPosts(postsWithPublisherData);
 
-                // Fetch publisher details (name and profile picture) for each post
+                // Fetch publisher details and event name for each post
                 postsWithPublisherData.forEach(post => {
+                    // Fetch publisher details
                     axios.post('http://localhost:3001/account/get', { email: post.publisher })
                         .then((response) => {
                             const publisherData = response.data || {};
@@ -46,12 +48,31 @@ function HomeCardPost() {
                         .catch((error) => {
                             console.error('Error fetching publisher details:', error);
                         });
+
+                    // Fetch event details
+                    axios.post('http://localhost:3001/event/get/id', { eventId: post.eventId })
+                        .then((response) => {
+                            const eventData = response.data || {};
+                            setPosts(prevPosts =>
+                                prevPosts.map(p =>
+                                    p.announcementId === post.announcementId
+                                        ? {
+                                            ...p,
+                                            eventName: eventData.title || 'Unknown Event'
+                                        }
+                                        : p
+                                )
+                            );
+                        })
+                        .catch((error) => {
+                            console.error('Error fetching event details:', error);
+                        });
                 });
             })
             .catch((error) => {
                 console.error('Error fetching announcements:', error);
             });
-    }, []);
+    }, [accountemail]);
 
     const openModal = (post) => {
         setSelectedPost(post);
@@ -84,7 +105,8 @@ function HomeCardPost() {
                             </div>
                         </div>
 
-                        <h3 className="post-title">{post.title}</h3>
+                        <h2 className="post-title">{post.title}</h2>
+                        <h3 className="post-title">{post.eventName || 'Loading event name...'}</h3>
                         <p className="post-content">{post.description.substring(0, 200)}...</p>
 
                         {post.description && (
@@ -110,6 +132,8 @@ function HomeCardPost() {
                     onClose={closeModal}
                     postDetails={selectedPost}
                     accountName={selectedPost.publisherName}
+                    eventName={selectedPost.eventName}
+                    email={accountemail}
                 />
             )}
         </div>

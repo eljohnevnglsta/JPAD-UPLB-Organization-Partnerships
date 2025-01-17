@@ -52,6 +52,7 @@ function CreateEvent() {
                 throw new Error(response.data.message);
             }
             alert("Event created successfully!");
+            window.location.href = '/';
         }).catch((error) => {
             console.log(error.message);
             alert("An error occurred. Please try again.");
