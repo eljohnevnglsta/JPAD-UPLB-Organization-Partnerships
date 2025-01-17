@@ -15,7 +15,7 @@ function CardPost({ publisher }) {
                 const response = await axios.post('http://localhost:3001/announcement/get/all/org', {
                     publisher, // pass the publisher value here
                 });
-                console.log(response.data); // testing
+                // console.log(response.data); // testing
                 setAnnouncements(response.data); 
             } catch (error) {
                 console.error('Error fetching announcements:', error.message);

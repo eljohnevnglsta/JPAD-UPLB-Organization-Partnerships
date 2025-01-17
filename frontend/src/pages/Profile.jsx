@@ -29,7 +29,7 @@ function Profile() {
       <div className="profile-body">
         <div className="body-side">
           <ButtonProfile isPrivateView={true} onEditProfileClick={openModal}  onPartnerClick={openPartnerModal}/> {/* pass the functions to the buttons*/}
-          <SidePanel />
+          <SidePanel publisher="exec@yses.org"/>
         </div>
         <MainPanel />
       </div>     

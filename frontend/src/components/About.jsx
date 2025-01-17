@@ -15,7 +15,7 @@ function About() {
         axios.post('http://localhost:3001/account/get', {email: "exec@yses.org"})
         .then((response) => {
             setOrgData(response.data);  
-            console.log(response.data)
+            // console.log(response.data)
         })
         .catch((error) => {
             console.log(error.message);
