@@ -1,0 +1,101 @@
+/* Header.css */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #121212, #1e1e1e);
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    padding: 15px;
+  }
+  
+  .logo-section {
+    flex-basis: 60%;
+  }
+
+  .logo-section p{
+    color: white;
+  }
+  
+  .logo-image {
+    width: 150px;
+    height: auto;
+    transition: transform 0.3s;
+  }
+  
+  .logo-image:hover {
+    transform: scale(1.1);
+  }
+  
+  .nav-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-basis: 40%;
+  }
+  
+  .nav-item {
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+  }
+  
+  .nav-item:hover {
+    color: #00aaff;
+    transform: scale(1.1);
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .search-input {
+    padding: 5px 10px;
+    border: 2px solid #555;
+    border-radius: 4px;
+    outline: none;
+    background-color: #1e1e1e;
+    color: white;
+    transition: border 0.3s;
+  }
+  
+  .search-input:focus {
+    border: 2px solid #00aaff;
+  }
+  
+  .search-icon {
+    background: none;
+    border: none;
+    color: #00aaff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .search-icon:hover {
+    transform: scale(1.2);
+  }
+  
+  .name-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .yses-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  
+  .name {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  

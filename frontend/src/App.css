@@ -1,16 +1,9 @@
-body {
+*{
   margin: 0;
   padding: 0;
-  background-color: white;
-  font-family: Arial, sans-serif;
+  box-sizing: border-box;
 }
 
-.app-container {
-  margin: 0;
-  padding: 0;
-  background-color: white;
-}
-
-main {
-  padding: 20px;
+.main-content{
+  width: 100%;
 }
