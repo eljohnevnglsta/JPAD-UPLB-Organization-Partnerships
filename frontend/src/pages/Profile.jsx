@@ -14,7 +14,9 @@ function Profile() {
   const [isModalOpen, setIsModalOpen] = useState(false); // for Edit Profile Modal
   const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false); // for Partner Modal
 
-  const openModal = () => setIsModalOpen(true); // open Edit Profile Modal
+  const openModal = () => {
+    setIsModalOpen(true);
+  }
   const closeModal = () => setIsModalOpen(false); // close Edit Profile Modal
 
   const openPartnerModal = () => setIsPartnerModalOpen(true); // same as above but for Partner Modal
@@ -61,8 +63,18 @@ function Profile() {
       </div>     
 
       {/* conditional rendering for modals */}
-      {isModalOpen && <EditProfileModal onClose={closeModal} />}
-      {isPartnerModalOpen && <PartnerModal onClose={closePartnerModal} />}
+      {isModalOpen && (
+    <>
+        {console.log("Rendering EditProfileModal")}
+        <EditProfileModal onClose={closeModal} />
+    </>
+)}
+{isPartnerModalOpen && (
+    <>
+        {console.log("Rendering PartnerModal")}
+        <PartnerModal onClose={closePartnerModal} />
+    </>
+)}
     </>
   );
 }
