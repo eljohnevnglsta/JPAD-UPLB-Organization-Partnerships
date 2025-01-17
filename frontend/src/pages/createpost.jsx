@@ -1,11 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function CreatePost() {
-  const [title, setTitle] = useState('');
-  const [caption, setCaption] = useState('');
-  const [imageCover, setImageCover] = useState('');
-  const [eventLinked, setEventLinked] = useState('');
-  const [error, setError] = useState('');
+
+    // Get account details from local storage
+    const userDetails = JSON.parse(localStorage.getItem('account'));
+    const userEmail = userDetails.email;
+
+    const [title, setTitle] = useState('');
+    const [caption, setCaption] = useState('');
+    const [imageCover, setImageCover] = useState('');
+    const [eventLinked, setEventLinked] = useState('');
+    const [error, setError] = useState('');
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/event/get/all')
+            .then((response) => {
+                const userEvents = response.data.filter((event) => event.publisher === userEmail);
+                setEvents(userEvents);
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+    }, [userEmail]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,14 +33,24 @@ function CreatePost() {
       return;
     }
 
-    setError('');
+    axios.post('http://localhost:3001/announcement/create', {
+        publisher: userEmail,
+        title,
+        description: caption,
+        eventId: eventLinked,
+        cover: imageCover
+    }).then((response) => {
+        if (response.data.success !== true) {
+            throw new Error(response.data.message);
+        }
+        alert('Post created successfully!');
+        window.location.href = '/';
+    }).catch((error) => {
+        console.log(error.message);
+        alert('An error occurred. Please try again.');
+    });
 
-    console.log('Title:', title);
-    console.log('Caption:', caption);
-    console.log('Image Cover:', imageCover);
-    console.log('Event Linked:', eventLinked);
-
-  };
+    };
 
   return (
     <div className='tailwind-scope'>
@@ -82,9 +110,9 @@ function CreatePost() {
                             className="w-full p-3 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
                         >
                             <option value="" disabled>Select event</option>
-                            <option value="event1">Event 1</option>
-                            <option value="event2">Event 2</option>
-                            <option value="event3">Event 3</option>
+                            {events.map((event) => (
+                                <option key={event.eventId} value={event.eventId}>{event.title}</option>
+                            ))}
                         </select>
                     </div>
 

@@ -18,6 +18,7 @@ function HomeCardPost() {
                     publisherName: '',
                     publisherProfilePicture: ProfilePicture // Use default profile picture initially
                 }));
+                postsWithPublisherData.reverse(); // Show most recent posts first
                 setPosts(postsWithPublisherData);
 
                 // Fetch publisher details (name and profile picture) for each post

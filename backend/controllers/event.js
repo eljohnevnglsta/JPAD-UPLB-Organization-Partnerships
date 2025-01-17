@@ -89,7 +89,7 @@ export const getEventsByPublisher = async (req, res) => {
     try {
         const { publisher } = req.body;
         const events = await Event.find({ publisher });
-        res.status(200).json({success: true, message: "Events found", value: events});
+        res.status(200).json(events);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -99,7 +99,7 @@ export const getEventsByPublisher = async (req, res) => {
 export const getAllEvents = async (req, res) => {
     try {
         const events = await Event.find();
-        res.status(200).json({success: true, message: "Events found", value: events});
+        res.status(200).json(events);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
