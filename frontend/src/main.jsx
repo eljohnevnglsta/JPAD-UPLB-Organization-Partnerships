@@ -9,6 +9,7 @@ import Management from './pages/Management';
 import CreateEvent from './pages/createevent';
 import CreatePost from './pages/createpost';
 import Search from './pages/Search';
+import Dashboard from './pages/Dashboard';
 import './index.css';
 import NavigationBar from './components/NavigationBar/NavigationBar';
 
@@ -39,6 +40,12 @@ createRoot(document.getElementById('root')).render(
           </div>
         } />
         <Route path="/search/" element={<Search />} />
+        <Route path="/dashboard" element={
+          <div>
+            <NavigationBar />
+            <Dashboard />
+          </div>
+        } />
       </Routes>
     </Router>
   </StrictMode>

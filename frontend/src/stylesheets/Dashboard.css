@@ -1,6 +1,5 @@
 /* General styles */
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f8f8f8;
@@ -164,4 +163,23 @@ nav a img {
 
 .event.gray {
   background-color: gray;
+}
+
+.event {
+  display: block;
+  margin: 2px 0;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.event-meeting {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+.event-workshop {
+  background-color: #007bff;
+  color: #fff;
 }

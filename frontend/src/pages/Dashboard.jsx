@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // Axios for API requests
-import "../stylesheets/Dashboard.css";
+import axios from "axios";
+import NavigationBar from "../components/NavigationBar/NavigationBar";
 
 const Dashboard = () => {
+  const userEmail = JSON.parse(localStorage.getItem("account")).email;
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [events, setEvents] = useState([]); // Store events fetched from the backend
+  const [events, setEvents] = useState([]);
   const [partnerships, setPartnerships] = useState({
     new: 0,
     accepted: 0,
@@ -18,153 +19,150 @@ const Dashboard = () => {
     "July", "August", "September", "October", "November", "December",
   ];
 
-  // Function to get the days in the current month
   const getDaysInMonth = (month, year) => {
-    const date = new Date(year, month + 1, 0); // Last day of the month
-    const days = [];
-    for (let i = 1; i <= date.getDate(); i++) {
-      days.push(i);
-    }
-    return days;
+    const date = new Date(year, month + 1, 0);
+    return Array.from({ length: date.getDate() }, (_, index) => index + 1);
   };
 
-  // Fetch events and partnership data from the backend
-  const fetchDashboardData = async (month, year) => {
+  const fetchDashboardData = async () => {
     try {
-      // Fetch the partnership counts
-      const partnershipsResponse = await axios.get(
-        `http://localhost:5000/api/partnerships?month=${month + 1}&year=${year}`
+      const eventResponse = await axios.get("http://localhost:3001/event/get/all");
+      setEvents(
+        eventResponse.data.filter(
+          (event) =>
+            event.publisher === userEmail || event.partnerIds.includes(userEmail)
+        )
       );
-      setPartnerships(partnershipsResponse.data); // Assuming the API returns { new, accepted, pending, rejected }
 
-      // Fetch the events for the given month and year
-      const eventsResponse = await axios.get(
-        `http://localhost:5000/api/events?month=${month + 1}&year=${year}`
-      );
-      setEvents(eventsResponse.data); // Assuming the API returns an array of events
+      const requestResponse = await axios.get("http://localhost:3001/request/get/all");
+      const requests = requestResponse.data;
+      setPartnerships({ 
+        new: requests.filter((request) => request.invitee === userEmail && request.status === "pending").length,
+        accepted: requests.filter((request) => request.status === "approved" && (request.publisher === userEmail || request.invitee === userEmail)).length,
+        pending: requests.filter((request) => request.publisher === userEmail && request.status === "pending").length,
+        rejected: requests.filter((request) => request.status === "rejected" && (request.publisher === userEmail || request.invitee === userEmail)).length,
+      });
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
   useEffect(() => {
-    fetchDashboardData(currentMonth, currentYear);
-  }, [currentMonth, currentYear]);  
+    fetchDashboardData();
+  }, [currentMonth, currentYear]);
 
-  // Navigate to the previous month
   const handlePreviousMonth = () => {
     if (currentMonth === 0) {
-      setCurrentMonth(11); // Move to December of the previous year
+      setCurrentMonth(11);
       setCurrentYear((prevYear) => prevYear - 1);
     } else {
       setCurrentMonth((prevMonth) => prevMonth - 1);
     }
   };
 
-  // Navigate to the next month
   const handleNextMonth = () => {
     if (currentMonth === 11) {
-      setCurrentMonth(0); // Move to January of the next year
+      setCurrentMonth(0);
       setCurrentYear((prevYear) => prevYear + 1);
     } else {
       setCurrentMonth((prevMonth) => prevMonth + 1);
     }
   };
 
-  // Get the weekday for alignment
-  const getWeekday = (year, month, day) => {
-    return new Date(year, month, day).getDay(); // 0 is Sunday, 1 is Monday...
-  };
-
+  const getWeekday = (year, month, day) => new Date(year, month, day).getDay();
   const daysInMonth = getDaysInMonth(currentMonth, currentYear);
 
   return (
-    <div>
-      {/* Header */}
-      <header>
-        <div className="header-container">
-          <span className="site-name">sitename</span>
-          <nav>
-            <a href="#">dashboard</a>
-            <a href="#">partnerships</a>
-            <a href="#">
-              <img src="search-icon.png" alt="Search" />
-            </a>
-            <a href="#">Young Software Engineers Society</a>
-          </nav>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main>
-        {/* Stats Section */}
-        <div className="stats-container">
-          <div className="stat-box black">
-            <h1>{partnerships.new}</h1>
-            <p>new partnership requests</p>
+    <div className="tailwind-scope">
+    <div className="bg-gray-50 min-h-screen flex flex-col">
+      <main className="p-6 flex-1 space-y-8">
+        {/* Partnership Summary - Flex Row and Smaller */}
+        <div className="flex flex-wrap mb-8 justify-between">
+          <div className="bg-white shadow-lg rounded-lg p-4 w-150 text-center flex flex-col justify-center items-center">
+            <h1 className="text-xl font-semibold text-gray-700">{partnerships.new}</h1>
+            <p className="text-sm text-gray-500">New partnership requests</p>
           </div>
-          <div className="stat-box green">
-            <h1>{partnerships.accepted}</h1>
-            <p>accepted partnerships</p>
+          <div className="bg-green-500 text-white shadow-lg rounded-lg p-4 w-150 text-center flex flex-col justify-center items-center">
+            <h1 className="text-xl font-semibold">{partnerships.accepted}</h1>
+            <p className="text-sm">Accepted partnerships</p>
           </div>
-          <div className="stat-box blue">
-            <h1>{partnerships.pending}</h1>
-            <p>pending partnerships</p>
+          <div className="bg-blue-500 text-white shadow-lg rounded-lg p-4 w-150 text-center flex flex-col justify-center items-center">
+            <h1 className="text-xl font-semibold">{partnerships.pending}</h1>
+            <p className="text-sm">Pending partnerships</p>
           </div>
-          <div className="stat-box red">
-            <h1>{partnerships.rejected}</h1>
-            <p>rejected partnerships</p>
+          <div className="bg-red-500 text-white shadow-lg rounded-lg p-4 w-150 text-center flex flex-col justify-center items-center">
+            <h1 className="text-xl font-semibold">{partnerships.rejected}</h1>
+            <p className="text-sm">Rejected partnerships</p>
           </div>
         </div>
 
-        {/* Calendar Section */}
-        <section className="calendar-section">
-          <h2>upcoming events</h2>
-          <div className="calendar-navigation">
-            <button onClick={handlePreviousMonth}>Previous</button>
-            <p>
+        {/* Calendar Section - More Space */}
+        <section className="calendar-section bg-white shadow-lg rounded-lg p-6 h-full">
+          <h2 className="text-2xl font-semibold mb-6">Upcoming Events</h2>
+          <div className="flex justify-between items-center mb-4">
+            <button
+              onClick={handlePreviousMonth}
+              className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none"
+            >
+              Previous
+            </button>
+            <p className="text-xl font-medium text-gray-700">
               {months[currentMonth]}, {currentYear}
             </p>
-            <button onClick={handleNextMonth}>Next</button>
+            <button
+              onClick={handleNextMonth}
+              className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none"
+            >
+              Next
+            </button>
           </div>
-          <div className="calendar">
-            {/* Calendar Header */}
+
+          <div className="grid grid-cols-7 gap-4 mb-4">
             {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
-              <div className="day" key={day}>
-                {day}
-              </div>
+              <div key={day} className="text-center font-semibold text-gray-700">{day}</div>
             ))}
+          </div>
 
-            {/* Empty cells for alignment */}
-            {Array.from({ length: getWeekday(currentYear, currentMonth, 1) })
-              .map((_, index) => (
-                <div className="date empty" key={`empty-${index}`} />
-              ))}
+          <div className="grid grid-cols-7 gap-4">
+            {Array.from({ length: getWeekday(currentYear, currentMonth, 1) }).map(
+              (_, index) => (
+                <div className="text-center" key={`empty-${index}`} />
+              )
+            )}
 
-            {/* Calendar Dates */}
-            {daysInMonth.map((day, index) => (
-              <div className="date" key={index}>
-                {day}
-                {events
-                  .filter(
-                    (event) =>
-                      new Date(event.startDate).getDate() === day &&
-                      new Date(event.startDate).getMonth() === currentMonth &&
-                      new Date(event.startDate).getFullYear() === currentYear
-                  )
-                  .map((event, eventIndex) => (
+            {daysInMonth.map((day, index) => {
+              const currentDate = new Date(currentYear, currentMonth, day);
+
+              const filteredEvents = events.filter((event) => {
+                const eventDate = new Date(event.startDate);
+                return (
+                  eventDate.getDate() === currentDate.getDate() &&
+                  eventDate.getMonth() === currentDate.getMonth() &&
+                  eventDate.getFullYear() === currentDate.getFullYear()
+                );
+              });
+
+              return (
+                <div key={index} className="relative flex flex-col items-center">
+                  <div className="text-center py-2 rounded-full bg-gray-100 w-8 h-8 flex items-center justify-center">
+                    {day}
+                  </div>
+                  {filteredEvents.map((event, eventIndex) => (
                     <span
-                      className={`event ${event.type}`} // Use the event's type for dynamic styling
                       key={eventIndex}
+                      className={`absolute top-1 left-1 text-xs px-1 py-0.5 rounded-full bg-${event.eventType === "meeting" ? "blue" : "green"}-500 text-white`}
+                      title={event.description}
                     >
                       {event.title}
                     </span>
                   ))}
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
         </section>
       </main>
+    </div>
     </div>
   );
 };
