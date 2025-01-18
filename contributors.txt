@@ -1,0 +1,17 @@
+Evangelista, Eljohn Y. 
+    - Project Manager
+    - Created: Management Page
+Autriz, Mark Neil
+    - Created: Admin Page (front-end)
+Castillo, Sean Ashley
+    - Created: Dashboard Page
+Garcia, Dane Henrich
+    - Created: Login and Signup Pages 
+Lascano, Jana Mei
+    - Created: Profile Page
+Ledesma, Jhuliana
+    - Created: Homee Page
+Nonaka, Yuuri
+    - Created: Event and Post Creation Page
+Villarosa, James Carl
+    - Created: Admin Page (back-end)
